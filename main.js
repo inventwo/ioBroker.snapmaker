@@ -12,6 +12,7 @@ const {
 	normalizeProgress,
 	formatHms,
 	mapToolHead,
+	isDeviceToken,
 	isUnreachableError,
 } = require('./lib/snapmakerApi');
 
@@ -38,6 +39,8 @@ class Snapmaker extends utils.Adapter {
 		this.sessionReady = false;
 		/** Last non-zero laser power while a job is active (avoids 0% flicker between vectors). */
 		this.lastLaserPower = 0;
+		this.tokenRejectLogged = false;
+		this.unauthorizedLogged = false;
 	}
 
 	async onReady() {
@@ -76,10 +79,6 @@ class Snapmaker extends utils.Adapter {
 	 * @returns {Promise<string>}
 	 */
 	async loadToken() {
-		const fromConfig = String(this.config.apiToken || '').trim();
-		if (fromConfig) {
-			return fromConfig;
-		}
 		try {
 			const st = await this.getStateAsync('info.apiToken');
 			if (st && st.val) {
@@ -166,19 +165,33 @@ class Snapmaker extends utils.Adapter {
 	}
 
 	/**
-	 * Prefer configured token, then stored expert state.
+	 * Prefer configured token, then in-memory / stored expert state.
 	 *
 	 * @returns {Promise<string>}
 	 */
 	async resolveToken() {
 		const fromConfig = String(this.config.apiToken || '').trim();
 		if (fromConfig) {
-			return fromConfig;
+			if (!isDeviceToken(fromConfig)) {
+				if (!this.tokenRejectLogged) {
+					this.tokenRejectLogged = true;
+					this.log.error(
+						'API token in settings is not a valid Snapmaker UUID (Luban machine.json → server.token). ' +
+							'Re-enter the token after the encryption update and save the instance.',
+					);
+				}
+			} else {
+				return fromConfig;
+			}
 		}
-		if (this.api && this.api.token) {
+		if (this.api && isDeviceToken(this.api.token)) {
 			return this.api.token;
 		}
-		return this.loadToken();
+		const stored = await this.loadToken();
+		if (stored && isDeviceToken(stored)) {
+			return stored;
+		}
+		return '';
 	}
 
 	/**
@@ -190,26 +203,39 @@ class Snapmaker extends utils.Adapter {
 		}
 		this.polling = true;
 		try {
-			// Snapmaker drops the HTTP session unless connect is refreshed (same as Luban).
-			await this.ensureSession();
+			// Connect only to open/refresh a session — status polling alone keeps it alive.
+			if (!this.sessionReady || !this.api.token) {
+				await this.ensureSession();
+			}
 			if (!this.api.token) {
+				await this.setState('info.connection', false, true);
 				return;
 			}
 
 			const result = await this.api.getStatus();
 
 			if (result.unauthorized) {
-				this.log.info('Snapmaker token rejected — reconnecting with configured/stored token');
 				this.sessionReady = false;
-				const known = String(this.config.apiToken || '').trim();
-				if (known) {
-					this.api.setToken(known);
-				} else {
-					this.api.setToken('');
-					await this.setState('info.apiToken', '', true);
+				if (!this.unauthorizedLogged) {
+					this.unauthorizedLogged = true;
+					this.log.info(
+						'Snapmaker status unauthorized — reconnecting once (close Luban if this keeps happening)',
+					);
 				}
 				await this.setState('info.connection', false, true);
+				const known = await this.resolveToken();
+				this.api.setToken(known || '');
 				await this.ensureSession();
+				if (this.api.token) {
+					const retry = await this.api.getStatus();
+					if (!retry.unauthorized && !retry.pending && retry.data) {
+						this.unauthorizedLogged = false;
+						this.sessionReady = true;
+						await this.saveToken(this.api.token);
+						await this.setState('info.connection', true, true);
+						await this.publishStatus(retry.data);
+					}
+				}
 				return;
 			}
 
@@ -234,6 +260,8 @@ class Snapmaker extends utils.Adapter {
 				this.log.info('Snapmaker is reachable again');
 			}
 			this.connectBusyLogged = false;
+			this.unauthorizedLogged = false;
+			this.tokenRejectLogged = false;
 
 			this.sessionReady = true;
 			await this.saveToken(this.api.token);
@@ -270,8 +298,18 @@ class Snapmaker extends utils.Adapter {
 			if (err && err.code === 'CONNECT_BUSY') {
 				if (!this.connectBusyLogged) {
 					this.connectBusyLogged = true;
-					this.log.info('Snapmaker connect slot busy (another client connecting) — will retry');
+					this.log.info('Snapmaker connect slot busy (another client connecting, e.g. Luban) — will retry');
 				}
+				return;
+			}
+			if (err && err.code === 'TOKEN_REJECTED') {
+				if (!this.tokenRejectLogged) {
+					this.tokenRejectLogged = true;
+					this.log.error(
+						'Snapmaker rejected the API token. Re-enter Luban server.token in the instance settings and save.',
+					);
+				}
+				this.sessionReady = false;
 				return;
 			}
 			throw err;

@@ -80,6 +80,7 @@ If you like our work and would like to support us, we appreciate any donation.
 -->
 
 ### **WORK IN PROGRESS**
+- (skvarel) Fixed recurring connection drops: connect only when needed, reject invalid/rotated tokens, clearer Luban conflict logging
 - (skvarel) Modified `laser.power` to keep the last non-zero value during a job; added `laser.powerRaw` and `laser.on`
 - (skvarel) Fixed adapter-checker findings (keywords, admin dependency, encrypted apiToken, workflows, i18n keys)
 - (skvarel) Added laser power and work speed states (`laser.power`, `laser.workSpeed`)

@@ -5,6 +5,7 @@ const {
 	normalizeProgress,
 	formatHms,
 	mapToolHead,
+	isDeviceToken,
 	isUnreachableError,
 } = require('./lib/snapmakerApi');
 
@@ -36,5 +37,11 @@ describe('snapmakerApi helpers', () => {
 		);
 		expect(isUnreachableError(new Error('Timeout'))).to.equal(true);
 		expect(isUnreachableError(new Error('HTTP 500'))).to.equal(false);
+	});
+
+	it('isDeviceToken accepts Luban UUIDs only', () => {
+		expect(isDeviceToken('528ec6f1-0646-44d9-8371-a1a51e66bb36')).to.equal(true);
+		expect(isDeviceToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.x.y')).to.equal(false);
+		expect(isDeviceToken('')).to.equal(false);
 	});
 });
