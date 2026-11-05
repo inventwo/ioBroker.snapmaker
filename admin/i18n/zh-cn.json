@@ -1,5 +1,9 @@
 {
-	"snapmaker adapter settings": "snapmaker的适配器设置",
+	"API token (optional)": "API token (optional)",
+	"How often to request status (minimum 2 seconds)": "How often to request status (minimum 2 seconds)",
 	"IP address": "IP地址",
-	"Poll interval (seconds)": "轮询间隔（秒）"
+	"Local IP address of the Snapmaker (port 8080)": "Local IP address of the Snapmaker (port 8080)",
+	"Poll interval (seconds)": "轮询间隔（秒）",
+	"UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).": "UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).",
+	"snapmaker adapter settings": "snapmaker的适配器设置"
 }
