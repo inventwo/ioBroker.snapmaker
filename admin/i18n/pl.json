@@ -1,9 +1,9 @@
 {
-	"API token (optional)": "API token (optional)",
-	"How often to request status (minimum 2 seconds)": "How often to request status (minimum 2 seconds)",
+	"API token (optional)": "Token API (opcjonalnie)",
+	"How often to request status (minimum 2 seconds)": "Jak często odpytywać status (minimum 2 sekundy)",
 	"IP address": "Adres IP",
-	"Local IP address of the Snapmaker (port 8080)": "Local IP address of the Snapmaker (port 8080)",
+	"Local IP address of the Snapmaker (port 8080)": "Lokalny adres IP Snapmakera (port 8080)",
 	"Poll interval (seconds)": "Interwał sondowania (sekundy)",
-	"UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).": "UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).",
+	"UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).": "UUID z Luban machine.json → server.token. Pozostaw puste, aby poprosić o nowy token (potwierdź na ekranie dotykowym).",
 	"snapmaker adapter settings": "Ustawienia adaptera dla snapmaker"
 }
