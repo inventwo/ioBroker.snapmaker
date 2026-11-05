@@ -36,6 +36,8 @@ class Snapmaker extends utils.Adapter {
 		this.waitingForAuth = false;
 		this.connectBusyLogged = false;
 		this.sessionReady = false;
+		/** Last non-zero laser power while a job is active (avoids 0% flicker between vectors). */
+		this.lastLaserPower = 0;
 	}
 
 	async onReady() {
@@ -293,8 +295,17 @@ class Snapmaker extends utils.Adapter {
 		const elapsed = Math.max(0, Math.floor(Number(data.elapsedTime) || 0));
 		const remaining = Math.max(0, Math.floor(Number(data.remainingTime) || 0));
 		const toolHead = mapToolHead(data.toolHead);
-		const laserPower = Math.max(0, Number(data.laserPower) || 0);
+		const laserPowerRaw = Math.max(0, Number(data.laserPower) || 0);
 		const workSpeed = Math.max(0, Number(data.workSpeed) || 0);
+		const jobActive = status === 'RUNNING' || status === 'PAUSED';
+		if (jobActive) {
+			if (laserPowerRaw > 0) {
+				this.lastLaserPower = laserPowerRaw;
+			}
+		} else {
+			this.lastLaserPower = 0;
+		}
+		const laserPower = jobActive ? this.lastLaserPower : 0;
 
 		await this.setState('status', status, true);
 		await this.setState('printStatus', printStatus, true);
@@ -306,6 +317,8 @@ class Snapmaker extends utils.Adapter {
 		await this.setState('currentJob.remainingTime', remaining, true);
 		await this.setState('currentJob.remainingText', formatHms(remaining), true);
 		await this.setState('laser.power', laserPower, true);
+		await this.setState('laser.powerRaw', laserPowerRaw, true);
+		await this.setState('laser.on', laserPowerRaw > 0, true);
 		await this.setState('laser.workSpeed', workSpeed, true);
 	}
 
@@ -412,10 +425,21 @@ class Snapmaker extends utils.Adapter {
 
 		await this.ensureChannel('laser', 'Laser');
 		await this.ensureState('laser.power', 0, {
-			name: 'Laser power',
+			name: 'Laser power (last active during job)',
 			type: 'number',
 			unit: '%',
 			role: 'level',
+		});
+		await this.ensureState('laser.powerRaw', 0, {
+			name: 'Laser power (live)',
+			type: 'number',
+			unit: '%',
+			role: 'level',
+		});
+		await this.ensureState('laser.on', false, {
+			name: 'Laser firing',
+			type: 'boolean',
+			role: 'indicator.working',
 		});
 		await this.ensureState('laser.workSpeed', 0, {
 			name: 'Work speed',

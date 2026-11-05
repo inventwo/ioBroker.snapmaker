@@ -58,10 +58,12 @@ Under `snapmaker.<instance>.*`:
 | `currentJob.elapsedText` | Elapsed time (`HH:MM:SS`) |
 | `currentJob.remainingTime` | Remaining time (seconds) |
 | `currentJob.remainingText` | Remaining time (`HH:MM:SS`) |
-| `laser.power` | Laser power (%) |
+| `laser.power` | Laser power (%) — last non-zero value while job is `RUNNING`/`PAUSED` (no 0% flicker between vectors) |
+| `laser.powerRaw` | Laser power (%) — live snapshot from the machine (can be `0` between lines) |
+| `laser.on` | `true` while live power is greater than 0 |
 | `laser.workSpeed` | Work speed (`mm/min`) |
 
-Job fields are filled while a job is active; idle machines may leave them empty / zero.
+Job fields are filled while a job is active; idle machines may leave them empty / zero. For a finer live laser view, lower the poll interval (e.g. 2–3 s) and use `laser.powerRaw` / `laser.on`.
 
 ## Support
 
@@ -78,6 +80,7 @@ If you like our work and would like to support us, we appreciate any donation.
 -->
 
 ### **WORK IN PROGRESS**
+- (skvarel) Modified `laser.power` to keep the last non-zero value during a job; added `laser.powerRaw` and `laser.on`
 - (skvarel) Fixed adapter-checker findings (keywords, admin dependency, encrypted apiToken, workflows, i18n keys)
 - (skvarel) Added laser power and work speed states (`laser.power`, `laser.workSpeed`)
 - (skvarel) Fixed connection drops by refreshing `/api/v1/connect` on every poll (Luban behavior)
