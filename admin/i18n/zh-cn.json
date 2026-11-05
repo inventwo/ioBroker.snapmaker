@@ -1,9 +1,9 @@
 {
 	"API token (optional)": "API 令牌（可选）",
+	"Copy server.token (UUID) from Luban machine.json. Windows: %APPDATA%\\\\snapmaker-luban\\\\machine.json — Linux: ~/.config/snapmaker-luban/machine.json — macOS: ~/Library/Application Support/snapmaker-luban/machine.json. Leave empty to request a new token (confirm on the touchscreen).": "从 Luban machine.json 复制 server.token（UUID）。Windows: %APPDATA%\\\\snapmaker-luban\\\\machine.json — Linux: ~/.config/snapmaker-luban/machine.json — macOS: ~/Library/Application Support/snapmaker-luban/machine.json。留空可申请新令牌（在触摸屏上确认）。",
 	"How often to request status (minimum 2 seconds)": "状态查询频率（最少 2 秒）",
 	"IP address": "IP地址",
 	"Local IP address of the Snapmaker (port 8080)": "Snapmaker 本地 IP 地址（端口 8080）",
 	"Poll interval (seconds)": "轮询间隔（秒）",
-	"UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).": "来自 Luban machine.json → server.token 的 UUID。留空可申请新令牌（在触摸屏上确认）。",
 	"snapmaker adapter settings": "snapmaker的适配器设置"
 }

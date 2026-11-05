@@ -1,9 +1,9 @@
 {
 	"API token (optional)": "Токен API (необов’язково)",
+	"Copy server.token (UUID) from Luban machine.json. Windows: %APPDATA%\\\\snapmaker-luban\\\\machine.json — Linux: ~/.config/snapmaker-luban/machine.json — macOS: ~/Library/Application Support/snapmaker-luban/machine.json. Leave empty to request a new token (confirm on the touchscreen).": "Скопіюйте server.token (UUID) з Luban machine.json. Windows: %APPDATA%\\\\snapmaker-luban\\\\machine.json — Linux: ~/.config/snapmaker-luban/machine.json — macOS: ~/Library/Application Support/snapmaker-luban/machine.json. Залиште порожнім, щоб запросити новий токен (підтвердіть на сенсорному екрані).",
 	"How often to request status (minimum 2 seconds)": "Як часто запитувати статус (мінімум 2 секунди)",
 	"IP address": "IP-адреса",
 	"Local IP address of the Snapmaker (port 8080)": "Локальна IP-адреса Snapmaker (порт 8080)",
 	"Poll interval (seconds)": "Інтервал опитування (секунди)",
-	"UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).": "UUID з Luban machine.json → server.token. Залиште порожнім, щоб запросити новий токен (підтвердіть на сенсорному екрані).",
 	"snapmaker adapter settings": "Налаштування адаптера для snapmaker"
 }

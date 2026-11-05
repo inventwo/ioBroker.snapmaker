@@ -29,7 +29,7 @@
 		"apiToken": {
 			"type": "password",
 			"label": "API token (optional)",
-			"help": "UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).",
+			"help": "Copy server.token (UUID) from Luban machine.json. Windows: %APPDATA%\\snapmaker-luban\\machine.json — Linux: ~/.config/snapmaker-luban/machine.json — macOS: ~/Library/Application Support/snapmaker-luban/machine.json. Leave empty to request a new token (confirm on the touchscreen).",
 			"newLine": true,
 			"xs": 12,
 			"sm": 12,

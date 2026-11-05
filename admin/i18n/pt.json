@@ -1,9 +1,9 @@
 {
 	"API token (optional)": "Token da API (opcional)",
+	"Copy server.token (UUID) from Luban machine.json. Windows: %APPDATA%\\\\snapmaker-luban\\\\machine.json — Linux: ~/.config/snapmaker-luban/machine.json — macOS: ~/Library/Application Support/snapmaker-luban/machine.json. Leave empty to request a new token (confirm on the touchscreen).": "Copie server.token (UUID) do Luban machine.json. Windows: %APPDATA%\\\\snapmaker-luban\\\\machine.json — Linux: ~/.config/snapmaker-luban/machine.json — macOS: ~/Library/Application Support/snapmaker-luban/machine.json. Deixe vazio para solicitar um novo token (confirmar no ecrã tátil).",
 	"How often to request status (minimum 2 seconds)": "Com que frequência solicitar o status (mínimo 2 segundos)",
 	"IP address": "endereço IP",
 	"Local IP address of the Snapmaker (port 8080)": "Endereço IP local do Snapmaker (porta 8080)",
 	"Poll interval (seconds)": "Intervalo de sondagem (segundos)",
-	"UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).": "UUID do Luban machine.json → server.token. Deixe vazio para solicitar um novo token (confirmar no ecrã tátil).",
 	"snapmaker adapter settings": "Configurações do adaptador para snapmaker"
 }

@@ -37,7 +37,7 @@ Manufacturer: [Snapmaker](https://snapmaker.com/). Other Snapmaker 2.0 models (A
 |---------|---------|-------------|
 | IP address | — | Machine address (required), e.g. `192.168.150.150` |
 | Poll interval | `10` s | Status poll interval (min. 2 s) |
-| API token | empty | Optional UUID (`server.token` from Luban). Leave empty to request a new token |
+| API token | empty | Optional UUID from Luban `server.token` in `machine.json` (`%APPDATA%\snapmaker-luban\machine.json` on Windows; `~/.config/snapmaker-luban/machine.json` on Linux; `~/Library/Application Support/snapmaker-luban/machine.json` on macOS). Leave empty to request a new token |
 
 One machine per adapter instance.
 
@@ -80,6 +80,7 @@ If you like our work and would like to support us, we appreciate any donation.
 -->
 
 ### **WORK IN PROGRESS**
+- (skvarel) Added Luban `machine.json` paths to the API token setting help text
 - (skvarel) Fixed recurring connection drops: connect only when needed, reject invalid/rotated tokens, clearer Luban conflict logging
 - (skvarel) Modified `laser.power` to keep the last non-zero value during a job; added `laser.powerRaw` and `laser.on`
 - (skvarel) Fixed adapter-checker findings (keywords, admin dependency, encrypted apiToken, workflows, i18n keys)
