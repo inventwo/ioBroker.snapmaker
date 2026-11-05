@@ -293,6 +293,8 @@ class Snapmaker extends utils.Adapter {
 		const elapsed = Math.max(0, Math.floor(Number(data.elapsedTime) || 0));
 		const remaining = Math.max(0, Math.floor(Number(data.remainingTime) || 0));
 		const toolHead = mapToolHead(data.toolHead);
+		const laserPower = Math.max(0, Number(data.laserPower) || 0);
+		const workSpeed = Math.max(0, Number(data.workSpeed) || 0);
 
 		await this.setState('status', status, true);
 		await this.setState('printStatus', printStatus, true);
@@ -303,6 +305,8 @@ class Snapmaker extends utils.Adapter {
 		await this.setState('currentJob.elapsedText', formatHms(elapsed), true);
 		await this.setState('currentJob.remainingTime', remaining, true);
 		await this.setState('currentJob.remainingText', formatHms(remaining), true);
+		await this.setState('laser.power', laserPower, true);
+		await this.setState('laser.workSpeed', workSpeed, true);
 	}
 
 	/**
@@ -404,6 +408,20 @@ class Snapmaker extends utils.Adapter {
 		await this.ensureState('currentJob.remainingText', '00:00:00', {
 			name: 'Remaining time (text)',
 			type: 'string',
+		});
+
+		await this.ensureChannel('laser', 'Laser');
+		await this.ensureState('laser.power', 0, {
+			name: 'Laser power',
+			type: 'number',
+			unit: '%',
+			role: 'level',
+		});
+		await this.ensureState('laser.workSpeed', 0, {
+			name: 'Work speed',
+			type: 'number',
+			unit: 'mm/min',
+			role: 'value',
 		});
 	}
 }

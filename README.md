@@ -58,6 +58,8 @@ Under `snapmaker.<instance>.*`:
 | `currentJob.elapsedText` | Elapsed time (`HH:MM:SS`) |
 | `currentJob.remainingTime` | Remaining time (seconds) |
 | `currentJob.remainingText` | Remaining time (`HH:MM:SS`) |
+| `laser.power` | Laser power (%) |
+| `laser.workSpeed` | Work speed (`mm/min`) |
 
 Job fields are filled while a job is active; idle machines may leave them empty / zero.
 
@@ -76,6 +78,7 @@ If you like our work and would like to support us, we appreciate any donation.
 -->
 
 ### **WORK IN PROGRESS**
+- (skvarel) Added laser power and work speed states (`laser.power`, `laser.workSpeed`)
 - (skvarel) Fixed connection drops by refreshing `/api/v1/connect` on every poll (Luban behavior)
 - (skvarel) Fixed token recovery after 401 to reuse the configured Luban token instead of requesting a new one
 - (skvarel) Added Snapmaker 2.0 HTTP status polling (file name, remaining/elapsed time, progress, tool head)
