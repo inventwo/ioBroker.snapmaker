@@ -76,6 +76,8 @@ If you like our work and would like to support us, we appreciate any donation.
 -->
 
 ### **WORK IN PROGRESS**
+- (skvarel) Fixed connection drops by refreshing `/api/v1/connect` on every poll (Luban behavior)
+- (skvarel) Fixed token recovery after 401 to reuse the configured Luban token instead of requesting a new one
 - (skvarel) Added Snapmaker 2.0 HTTP status polling (file name, remaining/elapsed time, progress, tool head)
 - (skvarel) Added optional API token setting for Luban `server.token` reuse
 - (skvarel) initial release

@@ -165,6 +165,22 @@ class Snapmaker extends utils.Adapter {
 	}
 
 	/**
+	 * Prefer configured token, then stored expert state.
+	 *
+	 * @returns {Promise<string>}
+	 */
+	async resolveToken() {
+		const fromConfig = String(this.config.apiToken || '').trim();
+		if (fromConfig) {
+			return fromConfig;
+		}
+		if (this.api && this.api.token) {
+			return this.api.token;
+		}
+		return this.loadToken();
+	}
+
+	/**
 	 * @returns {Promise<void>}
 	 */
 	async poll() {
@@ -173,9 +189,8 @@ class Snapmaker extends utils.Adapter {
 		}
 		this.polling = true;
 		try {
-			if (!this.sessionReady || !this.api.token) {
-				await this.ensureSession();
-			}
+			// Snapmaker drops the HTTP session unless connect is refreshed (same as Luban).
+			await this.ensureSession();
 			if (!this.api.token) {
 				return;
 			}
@@ -183,10 +198,15 @@ class Snapmaker extends utils.Adapter {
 			const result = await this.api.getStatus();
 
 			if (result.unauthorized) {
-				this.log.info('Snapmaker token rejected — requesting a new connection');
+				this.log.info('Snapmaker token rejected — reconnecting with configured/stored token');
 				this.sessionReady = false;
-				this.api.setToken('');
-				await this.setState('info.apiToken', '', true);
+				const known = String(this.config.apiToken || '').trim();
+				if (known) {
+					this.api.setToken(known);
+				} else {
+					this.api.setToken('');
+					await this.setState('info.apiToken', '', true);
+				}
 				await this.setState('info.connection', false, true);
 				await this.ensureSession();
 				return;
@@ -233,6 +253,10 @@ class Snapmaker extends utils.Adapter {
 			return;
 		}
 		try {
+			const token = await this.resolveToken();
+			if (token) {
+				this.api.setToken(token);
+			}
 			const info = await this.api.connect(this.api.token || undefined);
 			if (info && info.token) {
 				this.api.setToken(info.token);
@@ -241,8 +265,6 @@ class Snapmaker extends utils.Adapter {
 			if (info && info.series) {
 				await this.setState('info.series', String(info.series), true);
 			}
-			// Session is only fully ready after a successful status (not 204)
-			this.sessionReady = false;
 		} catch (err) {
 			if (err && err.code === 'CONNECT_BUSY') {
 				if (!this.connectBusyLogged) {
