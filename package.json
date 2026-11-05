@@ -1,6 +1,6 @@
 {
   "name": "iobroker.snapmaker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Integrate Snapmaker 2.0 machines (e.g. A350) into ioBroker and expose job status such as filename and remaining time",
   "author": {
     "name": "skvarel",
