@@ -27,7 +27,6 @@ class Snapmaker extends utils.Adapter {
 		this.on('ready', this.onReady.bind(this));
 		this.on('unload', this.onUnload.bind(this));
 
-		/** @type {SnapmakerApi|null} */
 		this.api = null;
 		this.pollTimer = null;
 		this.pollIntervalMs = 10000;
@@ -269,9 +268,7 @@ class Snapmaker extends utils.Adapter {
 			if (err && err.code === 'CONNECT_BUSY') {
 				if (!this.connectBusyLogged) {
 					this.connectBusyLogged = true;
-					this.log.info(
-						'Snapmaker connect slot busy (another client connecting) — will retry',
-					);
+					this.log.info('Snapmaker connect slot busy (another client connecting) — will retry');
 				}
 				return;
 			}
@@ -291,11 +288,7 @@ class Snapmaker extends utils.Adapter {
 		const status = data.status != null ? String(data.status) : '';
 		const printStatus = data.printStatus != null ? String(data.printStatus) : '';
 		const fileName =
-			data.fileName != null
-				? String(data.fileName)
-				: data.filename != null
-					? String(data.filename)
-					: '';
+			data.fileName != null ? String(data.fileName) : data.filename != null ? String(data.filename) : '';
 		const progress = normalizeProgress(data.progress);
 		const elapsed = Math.max(0, Math.floor(Number(data.elapsedTime) || 0));
 		const remaining = Math.max(0, Math.floor(Number(data.remainingTime) || 0));
