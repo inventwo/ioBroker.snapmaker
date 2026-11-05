@@ -1,0 +1,57 @@
+---
+description: Snapmaker 2.0 HTTP API and state-tree conventions
+globs: main.js,lib/**
+alwaysApply: false
+---
+
+# Snapmaker patterns
+
+## Connectivity
+
+| Channel | Port | Use for |
+|---------|------|---------|
+| HTTP API v1 | `8080` | Connect (token), status poll, (later) control endpoints |
+
+Base URL: `http://<host>:8080/api/v1`
+
+### Auth flow
+
+1. `POST /connect` without token → machine returns `{ token, series, headType, … }` and shows confirm dialog on touchscreen
+2. Until confirmed, status may return `204 No Content` — keep polling status so the dialog stays alive
+3. After confirm, `POST /connect` with `token=<token>` (form-urlencoded) reuses the token
+4. Persist token (e.g. adapter state or local file under `this.adapterDir` / compact data); do not put token in `native` admin config
+5. On `401` / denied: clear token and restart connect flow
+
+### Status poll
+
+`GET /status?token=<token>` (optional cache-buster timestamp as Luban does)
+
+Important JSON fields (names may vary slightly by firmware — normalize in one place):
+
+| API field | State | Notes |
+|-----------|-------|-------|
+| `status` | `status` | `IDLE` / `RUNNING` / `PAUSED` / … |
+| `fileName` | `currentJob.fileName` | Current / last job |
+| `progress` | `currentJob.progress` | Often `0..1` → expose as `0..100` % |
+| `elapsedTime` | `currentJob.elapsedTime` | Seconds |
+| `remainingTime` | `currentJob.remainingTime` | Seconds |
+| `toolHead` / `headType` | `info.toolHead` | Laser / CNC / print (normalize labels) |
+| `x` / `y` / `z` | `info.x` / … | Optional v1+ |
+
+## Curated state tree (do not dump entire status JSON)
+
+```
+snapmaker.0.
+  info.connection
+  info.series, toolHead          (adapter v1+)
+  status
+  currentJob.fileName
+  currentJob.progress            (%)
+  currentJob.elapsedTime         (s)
+  currentJob.remainingTime       (s)
+```
+
+## Source of truth for behavior
+
+Implement in `lib/snapmakerApi.js` (HTTP helpers) + thin orchestration in `main.js`.
+Reference community implementations for field names if needed (Home Assistant Snapmaker integrations, Luban), but keep inventwo state naming (`currentJob.*`).

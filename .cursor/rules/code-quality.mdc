@@ -1,0 +1,57 @@
+---
+description: ioBroker adapter code quality and JavaScript conventions
+globs: main.js,lib/**,eslint.config.mjs,prettier.config.mjs
+alwaysApply: false
+---
+
+# Code Quality
+
+## Style
+
+- Prefer simple, robust JavaScript — no build step for runtime code
+- async/await for asynchronous operations
+- JSDoc on public methods where helpful
+- Use `this.log.*` in adapter code — never `console.log` in production adapter code
+- Tabs, **single quotes** (match `prettier.config.mjs`)
+- ESLint via `@iobroker/eslint-config` — run `npm run lint` after every change
+
+## Resource cleanup
+
+Clear timers in `onUnload()`; always call `callback()`:
+
+```javascript
+onUnload(callback) {
+	try {
+		if (this.pollTimer) {
+			this.clearTimeout(this.pollTimer);
+			this.pollTimer = null;
+		}
+		callback();
+	} catch (error) {
+		this.log.error(`Error during unload: ${error.message}`);
+		callback();
+	}
+}
+```
+
+Prefer a `setTimeout` poll chain over `setInterval` so a slow request cannot overlap the next poll.
+
+## Error handling
+
+- Wrap async/API work in try/catch; log errors, do not crash the adapter
+- Network failures: set `info.connection` false; wait for next poll
+- Do not retry failed HTTP calls in a tight loop
+- **Machine powered off** (`EHOSTUNREACH`, `ECONNREFUSED`, timeout, …): log **once** at **info**, not warn; log **once** at info when reachable again. Do not flood the log every poll cycle.
+
+## HTTP
+
+- **Preferred:** native `node:http` / `node:https`
+- **Avoid:** axios, request
+- Snapmaker API: `http://host:8080/api/v1/…` with form-urlencoded bodies where Luban does (`connect`, etc.)
+- Reasonable timeouts (e.g. 5–10 s) on every request
+
+## Dependencies
+
+- Node.js >= 22
+- `@iobroker/adapter-core`; avoid unnecessary dependencies
+- Prefer built-in Node modules

@@ -1,0 +1,65 @@
+{
+	"expert": "yes",
+	"cli": false,
+	"adapterName": "snapmaker",
+	"title": "Snapmaker",
+	"description": "Integrate Snapmaker 2.0 machines (e.g. A350) into ioBroker and expose job status such as filename and remaining time",
+	"keywords": [
+		"snapmaker",
+		"a350",
+		"3d printer",
+		"laser",
+		"cnc",
+		"status",
+		"job"
+	],
+	"contributors": [
+		"skvarel"
+	],
+	"authorName": "skvarel",
+	"authorGithub": "skvarel",
+	"authorEmail": "skvarel@inventwo.com",
+	"icon": {
+		"data": "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNS4yLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0i5Zu+5bGCXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjU2IDI1NjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9DQo8L3N0eWxlPg0KPHBhdGggZD0iTTg5LjMsMGg3Ny41YzI1LjcsMCwzOC41LDAsNTIuNCw0LjRjMTUuMSw1LjUsMjcsMTcuNCwzMi41LDMyLjVjNC40LDEzLjgsNC40LDI2LjcsNC40LDUyLjR2NzcuNWMwLDI1LjcsMCwzOC41LTQuNCw1Mi40DQoJYy01LjUsMTUuMS0xNy40LDI3LTMyLjUsMzIuNWMtMTMuOCw0LjQtMjYuNyw0LjQtNTIuNCw0LjRIODkuM2MtMjUuNywwLTM4LjUsMC01Mi40LTQuNGMtMTUuMS01LjUtMjctMTcuNC0zMi41LTMyLjUNCglDMCwyMDUuMywwLDE5Mi40LDAsMTY2LjdWODkuMmMwLTI1LjcsMC0zOC41LDQuNC01Mi40YzUuNS0xNS4xLDE3LjQtMjcsMzIuNS0zMi41QzUwLjcsMCw2My42LDAsODkuMywwTDg5LjMsMCIvPg0KPHBhdGggY2xhc3M9InN0MCIgZD0iTTE3My40LDQwLjJjLTEzLjItMi44LTIzLjktMS4xLTMyLjMsNS4yYy04LjQsNi4zLTE0LjEsMTYuNy0xNy4yLDMxLjRsLTkuOCw0NS45bDAsMGwtOC43LDQxDQoJYy0xLjcsNy44LTQuMSwxMy4yLTcuNCwxNi4zYy0zLjMsMy4xLTcuOSw0LTEzLjcsMi44Yy0zLjgtMC44LTcuOS0yLjMtMTIuMi00LjRsLTQuNywyMi4yYzQuMiwyLjIsOS4zLDQsMTUuNCw1LjMNCgljMTMuMiwyLjgsMjMuOSwxLjEsMzIuMy01LjJjOC40LTYuMywxNC4xLTE2LjcsMTcuMi0zMS40bDkuOC00NS45bDAsMGw4LjctNDFjMS43LTcuOCw0LjEtMTMuMiw3LjQtMTYuM2MzLjMtMy4xLDcuOS00LDEzLjctMi44DQoJYzMuOCwwLjgsNy45LDIuMywxMi4yLDQuNGw0LjctMjIuMkMxODQuNiw0My4yLDE3OS40LDQxLjUsMTczLjQsNDAuMnoiLz4NCjwvc3ZnPg0K",
+		"extension": "svg"
+	},
+	"features": [
+		"adapter"
+	],
+	"adminFeatures": [],
+	"type": "hardware",
+	"startMode": "daemon",
+	"connectionType": "local",
+	"dataSource": "poll",
+	"connectionIndicator": "yes",
+	"adapterSettings": [
+		{
+			"key": "host",
+			"label": "IP address",
+			"inputType": "text",
+			"defaultValue": "192.168.150.150"
+		},
+		{
+			"key": "pollInterval",
+			"label": "Poll interval (seconds)",
+			"inputType": "number",
+			"defaultValue": "10"
+		}
+	],
+	"language": "JavaScript",
+	"nodeVersion": "22",
+	"adminUi": "json",
+	"releaseScript": "yes",
+	"indentation": "Tab",
+	"quotes": "single",
+	"tools": [
+		"ESLint",
+		"type checking"
+	],
+	"eslintConfig": "official",
+	"gitRemoteProtocol": "HTTPS",
+	"license": "MIT License",
+	"dependabot": "yes",
+	"target": "zip",
+	"creatorVersion": "3.1.5"
+}

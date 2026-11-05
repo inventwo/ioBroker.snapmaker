@@ -1,0 +1,55 @@
+---
+description: ioBroker.snapmaker — project context, git, changelog (always apply)
+alwaysApply: true
+---
+
+# ioBroker.snapmaker
+
+Connects ioBroker to **Snapmaker 2.0** machines (primarily **A350**, including laser / CNC toolheads) via the local HTTP API:
+
+1. **Connect** — `POST http://<host>:8080/api/v1/connect` → token; first time confirm on the touchscreen
+2. **Status poll** — `GET http://<host>:8080/api/v1/status?token=<token>` — job file name, remaining/elapsed time, progress, status, toolhead, …
+
+Scaffold already exists (create-adapter 3.1.5). Implement logic in `main.js` + `lib/` (e.g. `lib/snapmakerApi.js`).
+
+## Naming & scope
+
+- Adapter name: **`iobroker.snapmaker`**
+- **Tested / primary target:** Snapmaker 2.0 A350 (10W laser available for testing)
+- Other Snapmaker 2.0 (A150 / A250) may work best-effort; document as untested until confirmed
+- **Out of scope (v1):** Artisan / J1 (SACP), U1 (Moonraker) — different protocols
+- Keep a curated, VIS-friendly state tree — do not mirror every API field blindly
+
+## Stack (match inventwo adapters)
+
+- Plain **JavaScript** in `main.js` + `lib/` — no TypeScript build step; optional `npm run check`
+- Admin UI via **jsonConfig** (`admin/jsonConfig.json`)
+- HTTP: native `node:http` / `node:https` (no axios)
+- Author / org: skvarel / inventwo (MIT)
+- Repo: `https://github.com/inventwo/ioBroker.snapmaker`
+- Node.js `>= 22`
+
+## Git (mandatory)
+
+- **Never** run `git commit`, `git push`, or releases unless the user explicitly asks
+- User commits and pushes; releases via `npm run release` (AlCalzone release-script)
+- **Never** run `npm run translate` — owner runs it manually before release
+
+## Changelog & README (mandatory for every change)
+
+For **every code or config change** update `README.md`:
+
+1. Add a user-facing entry under `### **WORK IN PROGRESS**` (English)
+2. Format: `- (skvarel) Added|Fixed|Modified|… description` — no bold prefixes (`**FIXED**`, etc.)
+3. Update Configuration / Data Points when options or states change
+4. Do **not** edit `CHANGELOG_OLD.md` manually
+
+## Scope
+
+- Minimal, focused diffs; match inventwo patterns (`creality`, `enpal`, `autodarts`, `foxesscloud`, `tidy`, `motioneye`)
+- Run `npm run lint` after every change (CI `--max-warnings 0`)
+- Icons: adapter uses `admin/snapmaker.svg`; README logo is `admin/snapmaker-logo.png`
+
+## Further rules
+
+See `.cursor/rules/` and `.cursor/ADAPTER-TODO.md`.

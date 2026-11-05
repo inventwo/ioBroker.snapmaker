@@ -1,0 +1,117 @@
+{
+	"common": {
+		"name": "snapmaker",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"uk": "Початкова версія",
+				"zh-cn": "首次出版"
+			}
+		},
+		"titleLang": {
+			"en": "Snapmaker",
+			"de": "Snapmaker",
+			"ru": "Снэпмейкер",
+			"pt": "Snapmaker",
+			"nl": "Snapmaker",
+			"fr": "Snapmaker",
+			"it": "Snapmaker",
+			"es": "Creador de instantáneas",
+			"pl": "Snapmaker",
+			"uk": "Снепмейкер",
+			"zh-cn": "快照制作器"
+		},
+		"desc": {
+			"en": "Integrate Snapmaker 2.0 machines (e.g. A350) into ioBroker and expose job status such as filename and remaining time",
+			"de": "Integrieren Sie Snapmaker 2.0-Maschinen (z. B. A350) in ioBroker und stellen Sie den Auftragsstatus wie Dateiname und verbleibende Zeit bereit.",
+			"ru": "Интегрируйте машины Snapmaker 2.0 (например, A350) в ioBroker и отображайте статус задания, такой как имя файла и оставшееся время.",
+			"pt": "Integre máquinas Snapmaker 2.0 (por exemplo, A350) ao ioBroker e exponha o status da tarefa, como nome do arquivo e tempo restante.",
+			"nl": "Integreer Snapmaker 2.0-machines (bijv. A350) in ioBroker en toon de taakstatus, zoals bestandsnaam en resterende tijd.",
+			"fr": "Intégrez les machines Snapmaker 2.0 (par exemple, A350) à ioBroker et exposez l'état des tâches, notamment le nom du fichier et le temps restant.",
+			"it": "Integrare le macchine Snapmaker 2.0 (ad esempio A350) in ioBroker ed esporre lo stato del lavoro, come il nome del file e il tempo rimanente.",
+			"es": "Integre las máquinas Snapmaker 2.0 (por ejemplo, A350) en ioBroker y exponga el estado del trabajo, como el nombre del archivo y el tiempo restante.",
+			"pl": "Zintegruj maszyny Snapmaker 2.0 (np. A350) z ioBroker i udostępnij status zadania, taki jak nazwa pliku i pozostały czas",
+			"uk": "Інтегруйте машини Snapmaker 2.0 (наприклад, A350) в ioBroker та відображайте стан завдання, такий як ім'я файлу та час, що залишився",
+			"zh-cn": "将 Snapmaker 2.0 机器（例如 A350）集成到 ioBroker 中，并公开作业状态，例如文件名和剩余时间。"
+		},
+		"authors": [
+			"skvarel <skvarel@inventwo.com>"
+		],
+		"keywords": [
+			"snapmaker",
+			"a350",
+			"3d printer",
+			"laser",
+			"cnc",
+			"status",
+			"job"
+		],
+		"licenseInformation": {
+			"type": "free",
+			"license": "MIT"
+		},
+		"platform": "Javascript/Node.js",
+		"icon": "snapmaker.svg",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/inventwo/ioBroker.snapmaker/main/admin/snapmaker.svg",
+		"readme": "https://github.com/inventwo/ioBroker.snapmaker/blob/main/README.md",
+		"loglevel": "info",
+		"tier": 3,
+		"mode": "daemon",
+		"type": "hardware",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "poll",
+		"adminUI": {
+			"config": "json"
+		},
+		"dependencies": [
+			{
+				"js-controller": ">=6.0.11"
+			}
+		],
+		"globalDependencies": [
+			{
+				"admin": ">=7.0.23"
+			}
+		]
+	},
+	"native": {
+		"host": "",
+		"pollInterval": 10,
+		"apiToken": ""
+	},
+	"objects": [],
+	"instanceObjects": [
+		{
+			"_id": "info",
+			"type": "channel",
+			"common": {
+				"name": "Information"
+			},
+			"native": {}
+		},
+		{
+			"_id": "info.connection",
+			"type": "state",
+			"common": {
+				"role": "indicator.connected",
+				"name": "Device or service connected",
+				"type": "boolean",
+				"read": true,
+				"write": false,
+				"def": false
+			},
+			"native": {}
+		}
+	]
+}

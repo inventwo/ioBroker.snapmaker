@@ -1,0 +1,27 @@
+---
+description: Testing with @iobroker/testing and Mocha
+globs: test/**,*.test.js
+alwaysApply: false
+---
+
+# Testing
+
+Use **only** `@iobroker/testing` for integration tests.
+
+## Scripts
+
+- `npm run test` — unit + package validation
+- `npm run test:js` — Mocha unit tests
+- `npm run test:package` — package / io-package / admin JSON
+- `npm run test:integration` — local only
+
+## Rules
+
+- Mock Snapmaker HTTP (`/api/v1/connect`, `/api/v1/status`) in unit tests — never hit a live machine in CI
+- Cover token reuse, `204` while waiting for touchscreen confirm, offline → online transition
+- Configure harness via `harness.objects.setObject()` before start
+- Plan sufficient timeouts for async start
+
+## CI order
+
+Lint first (`check-and-lint`), then `adapter-tests`.

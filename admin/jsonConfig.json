@@ -1,0 +1,41 @@
+{
+	"i18n": true,
+	"type": "panel",
+	"items": {
+		"host": {
+			"type": "text",
+			"label": "IP address",
+			"help": "Local IP address of the Snapmaker (port 8080)",
+			"newLine": true,
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 4,
+			"xl": 4
+		},
+		"pollInterval": {
+			"type": "number",
+			"label": "Poll interval (seconds)",
+			"help": "How often to request status (minimum 2 seconds)",
+			"min": 2,
+			"max": 3600,
+			"newLine": true,
+			"xs": 12,
+			"sm": 12,
+			"md": 6,
+			"lg": 4,
+			"xl": 4
+		},
+		"apiToken": {
+			"type": "password",
+			"label": "API token (optional)",
+			"help": "UUID from Luban machine.json → server.token. Leave empty to request a new token (confirm on the touchscreen).",
+			"newLine": true,
+			"xs": 12,
+			"sm": 12,
+			"md": 8,
+			"lg": 6,
+			"xl": 6
+		}
+	}
+}

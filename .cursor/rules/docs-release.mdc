@@ -1,0 +1,37 @@
+---
+description: README, changelog, and release workflow
+globs: README.md,io-package.json,CHANGELOG_OLD.md,docs/**
+alwaysApply: false
+---
+
+# Documentation & Releases
+
+## README (English only — ioBroker requirement)
+
+Required sections: What this adapter does, Configuration, Data Points, Changelog, License, Support.
+
+- Match inventwo visual layout (see `ioBroker.creality` README)
+- Logo: `admin/snapmaker-logo.png` (not the SVG icon)
+- Document local HTTP API on port `8080` and touchscreen token confirm
+- State clearly: **tested with Snapmaker 2.0 A350**; other 2.0 models best-effort; Artisan/U1 out of scope
+
+## Changelog format
+
+```markdown
+### **WORK IN PROGRESS**
+
+- (skvarel) Added status polling for fileName and remainingTime
+```
+
+Verbs: **Added**, **Fixed**, **Modified**, **Replaced**, **Removed**.
+
+- No bold tags like `**FIXED**` (breaks news translation)
+- Do **not** edit `CHANGELOG_OLD.md` manually
+- Releases: `npm run release` (or inventwo `release-patch|minor|major` if those scripts are added later)
+
+## io-package.json
+
+- Keep `common.version` in sync with `package.json`
+- New options → `native` with defaults
+- `common.type`: `hardware`; `connectionType`: `local`; `dataSource`: `poll`
+- `common.icon` / `extIcon` → `snapmaker.svg`
