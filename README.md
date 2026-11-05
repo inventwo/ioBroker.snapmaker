@@ -80,18 +80,17 @@ If you like our work and would like to support us, we appreciate any donation.
 -->
 
 ### **WORK IN PROGRESS**
-- (skvarel) Added Luban `machine.json` paths to the API token setting help text
-- (skvarel) Fixed recurring connection drops: connect only when needed, reject invalid/rotated tokens, clearer Luban conflict logging
-- (skvarel) Modified `laser.power` to keep the last non-zero value during a job; added `laser.powerRaw` and `laser.on`
-- (skvarel) Fixed adapter-checker findings (keywords, admin dependency, encrypted apiToken, workflows, i18n keys)
-- (skvarel) Added laser power and work speed states (`laser.power`, `laser.workSpeed`)
-- (skvarel) Fixed connection drops by refreshing `/api/v1/connect` on every poll (Luban behavior)
-- (skvarel) Fixed token recovery after 401 to reuse the configured Luban token instead of requesting a new one
-- (skvarel) Added Snapmaker 2.0 HTTP status polling (file name, remaining/elapsed time, progress, tool head)
-- (skvarel) Added optional API token setting for Luban `server.token` reuse
+
+### 0.1.0 (2026-11-05)
+- (skvarel) First public release for Snapmaker 2.0 (A350 and compatible)
+- (skvarel) Added status polling for job file name, progress, remaining/elapsed time
+- (skvarel) Added laser power and work speed (`laser.power`, `laser.powerRaw`, `laser.on`, `laser.workSpeed`)
+- (skvarel) Added optional Luban API token setting with `machine.json` path help
+- (skvarel) Fixed connection/session handling (token validation, less aggressive reconnect)
+- (skvarel) Fixed adapter-checker findings (keywords, admin dependency, encrypted apiToken, workflows, i18n)
 
 ### 0.0.1
-- (skvarel) initial release
+- (skvarel) initial scaffold
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
