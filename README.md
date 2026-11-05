@@ -80,6 +80,7 @@ If you like our work and would like to support us, we appreciate any donation.
 -->
 
 ### **WORK IN PROGRESS**
+- (skvarel) Added missing translations
 
 ### 0.1.0 (2026-11-05)
 - (skvarel) First public release for Snapmaker 2.0 (A350 and compatible)
