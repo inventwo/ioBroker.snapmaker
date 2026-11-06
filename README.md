@@ -79,7 +79,7 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.2.0 (2026-11-06)
 - (skvarel) Added `currentJob.finishAt` (local `YYYY-MM-DD HH:MM`)
 
 ### 0.1.1 (2026-11-05)

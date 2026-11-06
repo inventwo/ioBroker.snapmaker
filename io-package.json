@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "snapmaker",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "news": {
+      "0.2.0": {
+        "en": "Added `currentJob.finishAt` (local `YYYY-MM-DD HH:MM`)",
+        "de": "`CurrentJob.FinishAt` hinzugefügt (lokal `YYY-MM-DD HH:MM`)",
+        "ru": "Добавлен `CurrentJob.Finishat` (локальный `ГГГГ-ММ-ДД ХХ:ММ`)",
+        "pt": "Adicionado `currentJob.finisHat` (local `YYY-MM-DD HH:MM`)",
+        "nl": "`CurrentJob.finishAt` toegevoegd (lokaal `YYYY-MM-DD HH:MM`)",
+        "fr": "A ajouté « CurrentJob.Finishat » (local « YYYY-MM-DD HH:MM »)",
+        "it": "Aggiunto «CurrentJob.finishAt» (locale «AAAA-MM-GG HH:MM»)",
+        "es": "Se ha añadido `CurrentJob.FinishA' (local `YYY-MM-DD HH:MM`)",
+        "pl": "Dodano `CurrentJob.Finishat` (lokalny `RRRR-MM-DD HH:MM`)",
+        "uk": "Додано `CurrentJob.finishAt` (локальний `РРРР-ММ-ДД ХХ:ММ`)",
+        "zh-cn": "添加了 `currentJob.FinisHat`（本地 `YYYY-MM-DD HH: MM`）"
+      },
       "0.1.1": {
         "en": "Added missing translations",
         "de": "Fehlende Übersetzungen",
