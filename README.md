@@ -58,6 +58,7 @@ Under `snapmaker.<instance>.*`:
 | `currentJob.elapsedText` | Elapsed time (`HH:MM:SS`) |
 | `currentJob.remainingTime` | Remaining time (seconds) |
 | `currentJob.remainingText` | Remaining time (`HH:MM:SS`) |
+| `currentJob.finishAt` | Estimated finish time (local `YYYY-MM-DD HH:MM`) |
 | `laser.power` | Laser power (%) — last non-zero value while job is `RUNNING`/`PAUSED` (no 0% flicker between vectors) |
 | `laser.powerRaw` | Laser power (%) — live snapshot from the machine (can be `0` between lines) |
 | `laser.on` | `true` while live power is greater than 0 |
@@ -78,6 +79,9 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Added `currentJob.finishAt` (local `YYYY-MM-DD HH:MM`)
+
 ### 0.1.1 (2026-11-05)
 - (skvarel) Added missing translations
 

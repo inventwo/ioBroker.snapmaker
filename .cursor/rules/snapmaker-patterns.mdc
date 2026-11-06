@@ -49,6 +49,7 @@ snapmaker.0.
   currentJob.progress            (%)
   currentJob.elapsedTime         (s)
   currentJob.remainingTime       (s)
+  currentJob.finishAt            (local YYYY-MM-DD HH:MM)
 ```
 
 ## Source of truth for behavior

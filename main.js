@@ -11,6 +11,7 @@ const {
 	DEFAULT_PORT,
 	normalizeProgress,
 	formatHms,
+	formatFinishAt,
 	mapToolHead,
 	isDeviceToken,
 	isUnreachableError,
@@ -354,6 +355,7 @@ class Snapmaker extends utils.Adapter {
 		await this.setState('currentJob.elapsedText', formatHms(elapsed), true);
 		await this.setState('currentJob.remainingTime', remaining, true);
 		await this.setState('currentJob.remainingText', formatHms(remaining), true);
+		await this.setState('currentJob.finishAt', formatFinishAt(remaining), true);
 		await this.setState('laser.power', laserPower, true);
 		await this.setState('laser.powerRaw', laserPowerRaw, true);
 		await this.setState('laser.on', laserPowerRaw > 0, true);
@@ -458,6 +460,10 @@ class Snapmaker extends utils.Adapter {
 		});
 		await this.ensureState('currentJob.remainingText', '00:00:00', {
 			name: 'Remaining time (text)',
+			type: 'string',
+		});
+		await this.ensureState('currentJob.finishAt', '', {
+			name: 'Finish at (local YYYY-MM-DD HH:MM)',
 			type: 'string',
 		});
 
