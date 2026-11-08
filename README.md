@@ -7,7 +7,7 @@
 [![NPM Version](https://nodei.co/npm/iobroker.snapmaker.svg?style=shields&data=v,u,d&color=orange)](https://www.npmjs.com/package/iobroker.snapmaker)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.snapmaker.svg)](https://www.npmjs.com/package/iobroker.snapmaker)
 
-[![COMMUNITY](https://img.shields.io/badge/community%20-ioBroker%20|%20forum-blue.svg)](https://forum.iobroker.net)
+[![COMMUNITY](https://img.shields.io/badge/community%20-ioBroker%20|%20forum-blue.svg)](https://forum.iobroker.net/topic/85774/test-adapter-snapmaker-2.0-alpha)
 [![MAINTAINER](https://img.shields.io/badge/maintainer-skvarel%20@%20inventwo-yellowgreen.svg)](https://github.com/skvarel)
 [![AI](https://img.shields.io/badge/ai%20assisted-cursor-blue.svg)](https://github.com/inventwo/ioBroker.snapmaker/blob/main/.cursor/iobroker-adapter.mdc)
 
