@@ -83,7 +83,7 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.3.0 (2026-11-08)
 - (skvarel) Added `meta.folder` typing and localized title for adapter/instance namespace
 - (skvarel) Added `info.x` / `info.y` / `info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine` / `totalLines`
 
