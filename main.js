@@ -6,12 +6,15 @@
  */
 
 const utils = require('@iobroker/adapter-core');
+const ioPack = require('./io-package.json');
 const {
 	SnapmakerApi,
 	DEFAULT_PORT,
 	normalizeProgress,
 	formatHms,
 	formatFinishAt,
+	roundCoord,
+	toBool,
 	mapToolHead,
 	isDeviceToken,
 	isUnreachableError,
@@ -42,9 +45,22 @@ class Snapmaker extends utils.Adapter {
 		this.lastLaserPower = 0;
 		this.tokenRejectLogged = false;
 		this.unauthorizedLogged = false;
+		this.systemLanguage = 'en';
 	}
 
 	async onReady() {
+		try {
+			const systemConfig = await this.getForeignObjectAsync('system.config');
+			if (systemConfig?.common?.language) {
+				this.systemLanguage = systemConfig.common.language;
+			}
+		} catch (err) {
+			this.log.debug(`Could not read system language: ${err && err.message ? err.message : String(err)}`);
+		}
+
+		await this.ensureAdapterRootMeta();
+		await this.ensureInstanceMeta();
+
 		const host = String(this.config.host || '').trim();
 		const pollInterval = Math.max(2, Number(this.config.pollInterval) || 10);
 		this.pollIntervalMs = pollInterval * 1000;
@@ -74,6 +90,67 @@ class Snapmaker extends utils.Adapter {
 
 		await this.poll().catch(err => this.logUnreachable(err));
 		this.scheduleNextPoll();
+	}
+
+	/**
+	 * Ensure the adapter root object (snapmaker) is typed as meta.folder.
+	 * Must be done at runtime — objects with `_id: ""` in io-package.json only cover the instance namespace.
+	 *
+	 * @returns {Promise<void>}
+	 */
+	async ensureAdapterRootMeta() {
+		const rootId = this.name;
+		const titleLang = ioPack.common?.titleLang || {};
+		const lang = this.systemLanguage || 'en';
+		const metaObject = {
+			type: 'meta',
+			common: {
+				name: titleLang[lang] || titleLang.en || rootId,
+				type: 'meta.folder',
+			},
+			native: {},
+		};
+
+		const existing = await this.getForeignObjectAsync(rootId);
+		if (!existing) {
+			await this.setForeignObjectAsync(rootId, metaObject);
+		} else if (existing.type !== 'meta') {
+			await this.extendForeignObjectAsync(rootId, {
+				type: 'meta',
+				common: metaObject.common,
+			});
+		}
+	}
+
+	/**
+	 * Ensure this instance namespace (snapmaker.N) is typed as meta.folder with localized title.
+	 * Fixes existing installs created before the io-package instanceObjects meta entry.
+	 *
+	 * @returns {Promise<void>}
+	 */
+	async ensureInstanceMeta() {
+		const titleLang = ioPack.common?.titleLang || {};
+		const instanceId = this.namespace;
+		const metaCommon = {
+			name: titleLang,
+			type: 'meta.folder',
+		};
+
+		const existing = await this.getForeignObjectAsync(instanceId);
+		if (!existing) {
+			await this.setForeignObjectAsync(instanceId, {
+				type: 'meta',
+				common: metaCommon,
+				native: {},
+			});
+			return;
+		}
+		if (existing.type !== 'meta') {
+			await this.extendForeignObjectAsync(instanceId, {
+				type: 'meta',
+				common: metaCommon,
+			});
+		}
 	}
 
 	/**
@@ -336,6 +413,13 @@ class Snapmaker extends utils.Adapter {
 		const toolHead = mapToolHead(data.toolHead);
 		const laserPowerRaw = Math.max(0, Number(data.laserPower) || 0);
 		const workSpeed = Math.max(0, Number(data.workSpeed) || 0);
+		const x = roundCoord(data.x);
+		const y = roundCoord(data.y);
+		const z = roundCoord(data.z);
+		const homed = toBool(data.homed);
+		const doorOpen = toBool(data.isEnclosureDoorOpen);
+		const currentLine = Math.max(0, Math.floor(Number(data.currentLine) || 0));
+		const totalLines = Math.max(0, Math.floor(Number(data.totalLines) || 0));
 		const jobActive = status === 'RUNNING' || status === 'PAUSED';
 		if (jobActive) {
 			if (laserPowerRaw > 0) {
@@ -349,6 +433,10 @@ class Snapmaker extends utils.Adapter {
 		await this.setState('status', status, true);
 		await this.setState('printStatus', printStatus, true);
 		await this.setState('info.toolHead', toolHead || String(data.toolHead || ''), true);
+		await this.setState('info.x', x, true);
+		await this.setState('info.y', y, true);
+		await this.setState('info.z', z, true);
+		await this.setState('info.homed', homed, true);
 		await this.setState('currentJob.fileName', fileName, true);
 		await this.setState('currentJob.progress', progress, true);
 		await this.setState('currentJob.elapsedTime', elapsed, true);
@@ -356,6 +444,9 @@ class Snapmaker extends utils.Adapter {
 		await this.setState('currentJob.remainingTime', remaining, true);
 		await this.setState('currentJob.remainingText', formatHms(remaining), true);
 		await this.setState('currentJob.finishAt', formatFinishAt(remaining), true);
+		await this.setState('currentJob.currentLine', currentLine, true);
+		await this.setState('currentJob.totalLines', totalLines, true);
+		await this.setState('enclosure.doorOpen', doorOpen, true);
 		await this.setState('laser.power', laserPower, true);
 		await this.setState('laser.powerRaw', laserPowerRaw, true);
 		await this.setState('laser.on', laserPowerRaw > 0, true);
@@ -424,6 +515,10 @@ class Snapmaker extends utils.Adapter {
 	async ensureObjects() {
 		await this.ensureState('info.series', '', { name: 'Machine series', type: 'string' });
 		await this.ensureState('info.toolHead', '', { name: 'Tool head', type: 'string' });
+		await this.ensureState('info.x', 0, { name: 'X position', type: 'number', unit: 'mm', role: 'value' });
+		await this.ensureState('info.y', 0, { name: 'Y position', type: 'number', unit: 'mm', role: 'value' });
+		await this.ensureState('info.z', 0, { name: 'Z position', type: 'number', unit: 'mm', role: 'value' });
+		await this.ensureState('info.homed', false, { name: 'Axes homed', type: 'boolean', role: 'indicator' });
 		await this.ensureState('info.apiToken', '', {
 			name: 'API token (stored)',
 			type: 'string',
@@ -465,6 +560,23 @@ class Snapmaker extends utils.Adapter {
 		await this.ensureState('currentJob.finishAt', '', {
 			name: 'Finish at (local YYYY-MM-DD HH:MM)',
 			type: 'string',
+		});
+		await this.ensureState('currentJob.currentLine', 0, {
+			name: 'Current G-code line',
+			type: 'number',
+			role: 'value',
+		});
+		await this.ensureState('currentJob.totalLines', 0, {
+			name: 'Total G-code lines',
+			type: 'number',
+			role: 'value',
+		});
+
+		await this.ensureChannel('enclosure', 'Enclosure');
+		await this.ensureState('enclosure.doorOpen', false, {
+			name: 'Enclosure door open',
+			type: 'boolean',
+			role: 'indicator',
 		});
 
 		await this.ensureChannel('laser', 'Laser');

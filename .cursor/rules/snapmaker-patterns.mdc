@@ -36,20 +36,26 @@ Important JSON fields (names may vary slightly by firmware — normalize in one 
 | `elapsedTime` | `currentJob.elapsedTime` | Seconds |
 | `remainingTime` | `currentJob.remainingTime` | Seconds |
 | `toolHead` / `headType` | `info.toolHead` | Laser / CNC / print (normalize labels) |
-| `x` / `y` / `z` | `info.x` / … | Optional v1+ |
+| `x` / `y` / `z` | `info.x` / `y` / `z` | mm, rounded to 0.001 |
+| `homed` | `info.homed` | boolean |
+| `isEnclosureDoorOpen` | `enclosure.doorOpen` | boolean |
+| `currentLine` / `totalLines` | `currentJob.currentLine` / `totalLines` | G-code progress |
 
 ## Curated state tree (do not dump entire status JSON)
 
 ```
 snapmaker.0.
   info.connection
-  info.series, toolHead          (adapter v1+)
+  info.series, toolHead
+  info.x, y, z, homed
   status
   currentJob.fileName
   currentJob.progress            (%)
   currentJob.elapsedTime         (s)
   currentJob.remainingTime       (s)
   currentJob.finishAt            (local YYYY-MM-DD HH:MM)
+  currentJob.currentLine, totalLines
+  enclosure.doorOpen
 ```
 
 ## Source of truth for behavior

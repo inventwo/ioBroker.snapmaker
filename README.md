@@ -50,6 +50,8 @@ Under `snapmaker.<instance>.*`:
 | `info.connection` | Connection indicator |
 | `info.series` | Machine series (e.g. Snapmaker 2.0 A350) |
 | `info.toolHead` | Tool head (`Laser` / `CNC` / `Print`) |
+| `info.x` / `info.y` / `info.z` | Machine position (mm) |
+| `info.homed` | Axes homed |
 | `status` | Machine status (`IDLE`, `RUNNING`, `PAUSED`, …) |
 | `printStatus` | Job / print status text |
 | `currentJob.fileName` | Current / last job file name |
@@ -59,6 +61,8 @@ Under `snapmaker.<instance>.*`:
 | `currentJob.remainingTime` | Remaining time (seconds) |
 | `currentJob.remainingText` | Remaining time (`HH:MM:SS`) |
 | `currentJob.finishAt` | Estimated finish time (local `YYYY-MM-DD HH:MM`) |
+| `currentJob.currentLine` / `totalLines` | G-code line progress |
+| `enclosure.doorOpen` | Enclosure door open |
 | `laser.power` | Laser power (%) — last non-zero value while job is `RUNNING`/`PAUSED` (no 0% flicker between vectors) |
 | `laser.powerRaw` | Laser power (%) — live snapshot from the machine (can be `0` between lines) |
 | `laser.on` | `true` while live power is greater than 0 |
@@ -79,6 +83,10 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Added `meta.folder` typing and localized title for adapter/instance namespace
+- (skvarel) Added `info.x` / `info.y` / `info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine` / `totalLines`
+
 ### 0.2.0 (2026-11-06)
 - (skvarel) Added `currentJob.finishAt` (local `YYYY-MM-DD HH:MM`)
 

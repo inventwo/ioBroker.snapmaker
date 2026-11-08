@@ -138,6 +138,27 @@
   "objects": [],
   "instanceObjects": [
     {
+      "_id": "",
+      "type": "meta",
+      "common": {
+        "name": {
+          "en": "Snapmaker",
+          "de": "Snapmaker",
+          "ru": "Снэпмейкер",
+          "pt": "Snapmaker",
+          "nl": "Snapmaker",
+          "fr": "Snapmaker",
+          "it": "Snapmaker",
+          "es": "Creador de instantáneas",
+          "pl": "Snapmaker",
+          "uk": "Снепмейкер",
+          "zh-cn": "快照制作器"
+        },
+        "type": "meta.folder"
+      },
+      "native": {}
+    },
+    {
       "_id": "info",
       "type": "channel",
       "common": {
