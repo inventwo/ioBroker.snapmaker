@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "snapmaker",
-    "version": "0.4.1",
+    "version": "0.4.2",
     "news": {
+      "0.4.2": {
+        "en": "Fixed Prettier formatting so CI lint passes",
+        "de": "Hübscher formatiert, CI Lint Passes",
+        "ru": "Исправлено форматирование Prettier, позволяющее передавать линт CI",
+        "pt": "Fixou o formato Prettier para que o CI lint passe",
+        "nl": "Opgelost: mooiere opmaak zodat CI lint overgaat",
+        "fr": "Le formatage Prettier a été corrigé pour CI Lint",
+        "it": "Corretto il formato Prettier per CI Lint",
+        "es": "Se corrigió el formato Prettier para que CI lint pase",
+        "pl": "Naprawiono ładniejsze formatowanie, dzięki czemu włókna CI przechodziły",
+        "uk": "Виправлено більш гарне форматування, щоб CI lint проходив",
+        "zh-cn": "修复了 Prettier 格式的问题，这样 CI lint 就可以通过了"
+      },
       "0.4.1": {
         "en": "Fixed `laser.modulePower` / `info.toolHead`: use connect `headType`",
         "de": "`Laser.ModulePower`/`info.toolhead` behoben: connect `HeadType`",
