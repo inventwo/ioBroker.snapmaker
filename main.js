@@ -17,6 +17,7 @@ const {
 	toBool,
 	mapToolHead,
 	parseLaserModulePower,
+	mapConnectHeadType,
 	isDeviceToken,
 	isUnreachableError,
 } = require('./lib/snapmakerApi');
@@ -44,6 +45,8 @@ class Snapmaker extends utils.Adapter {
 		this.sessionReady = false;
 		/** Last non-zero laser power while a job is active (avoids 0% flicker between vectors). */
 		this.lastLaserPower = 0;
+		/** @type {{ kind: string, label: string, modulePower: number }|null} */
+		this.headInfo = null;
 		this.tokenRejectLogged = false;
 		this.unauthorizedLogged = false;
 		this.systemLanguage = 'en';
@@ -373,6 +376,12 @@ class Snapmaker extends utils.Adapter {
 			if (info && info.series) {
 				await this.setState('info.series', String(info.series), true);
 			}
+			const mappedHead = mapConnectHeadType(info && info.headType);
+			if (mappedHead) {
+				this.headInfo = mappedHead;
+				await this.setState('info.toolHead', mappedHead.label, true);
+				await this.setState('laser.modulePower', mappedHead.modulePower, true);
+			}
 		} catch (err) {
 			if (err && err.code === 'CONNECT_BUSY') {
 				if (!this.connectBusyLogged) {
@@ -411,9 +420,18 @@ class Snapmaker extends utils.Adapter {
 		const progress = normalizeProgress(data.progress);
 		const elapsed = Math.max(0, Math.floor(Number(data.elapsedTime) || 0));
 		const remaining = Math.max(0, Math.floor(Number(data.remainingTime) || 0));
-		const toolHeadRaw = data.toolHead != null ? data.toolHead : data.headType;
-		const toolHead = mapToolHead(toolHeadRaw);
-		const modulePower = parseLaserModulePower(toolHeadRaw);
+		const toolHeadRaw = data.toolHead != null ? data.toolHead : null;
+		const statusWatts = parseLaserModulePower(toolHeadRaw);
+		const statusLabel = mapToolHead(toolHeadRaw);
+		// Prefer connect headType (numeric) — status often only says "LASER" for 1.6W and 10W.
+		const modulePower =
+			statusWatts > 0 ? statusWatts : this.headInfo && this.headInfo.modulePower != null ? this.headInfo.modulePower : 0;
+		const toolHead =
+			statusWatts > 0
+				? statusLabel
+				: this.headInfo && this.headInfo.label
+					? this.headInfo.label
+					: statusLabel;
 		const laserPowerRaw = Math.max(0, Number(data.laserPower) || 0);
 		const workSpeed = Math.max(0, Number(data.workSpeed) || 0);
 		const x = roundCoord(data.x);

@@ -49,7 +49,7 @@ Under `snapmaker.<instance>.*`:
 |-------|-------------|
 | `info.connection` | Connection indicator |
 | `info.series` | Machine series (e.g. Snapmaker 2.0 A350) |
-| `info.toolHead` | Tool head (`Laser` / `10W Laser` / `CNC` / `Print`, …) |
+| `info.toolHead` | Tool head from connect `headType` (e.g. `10W Laser` / `1.6W Laser` / `CNC` / `Print`) |
 | `info.x` / `info.y` / `info.z` | Machine position (mm) |
 | `info.homed` | Axes homed |
 | `status` | Machine status (`IDLE`, `RUNNING`, `PAUSED`, …) |
@@ -63,7 +63,7 @@ Under `snapmaker.<instance>.*`:
 | `currentJob.finishAt` | Estimated finish time (local `YYYY-MM-DD HH:MM`) |
 | `currentJob.currentLine` / `totalLines` | G-code line progress |
 | `enclosure.doorOpen` | Enclosure door open |
-| `laser.modulePower` | Rated laser module power (W), e.g. `10` for 10W head (`0` if not laser) |
+| `laser.modulePower` | Rated laser module power (W) from connect `headType` (3→1.6, 4→10, 6→20, 7→40, 9→2; `0` if not laser) |
 | `laser.power` | Laser power (%) — last non-zero value while job is `RUNNING`/`PAUSED` (no 0% flicker between vectors) |
 | `laser.powerRaw` | Laser power (%) — live snapshot from the machine (can be `0` between lines) |
 | `laser.on` | `true` while live power is greater than 0 |
@@ -84,6 +84,9 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Fixed `laser.modulePower` / `info.toolHead`: use connect `headType`
+
 ### 0.4.0 (2026-11-11)
 - (skvarel) Added `laser.modulePower` (rated watts) and wattage-aware `info.toolHead` labels
 

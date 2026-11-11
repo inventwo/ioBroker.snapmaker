@@ -35,7 +35,7 @@ Important JSON fields (names may vary slightly by firmware — normalize in one 
 | `progress` | `currentJob.progress` | Often `0..1` → expose as `0..100` % |
 | `elapsedTime` | `currentJob.elapsedTime` | Seconds |
 | `remainingTime` | `currentJob.remainingTime` | Seconds |
-| `toolHead` / `headType` | `info.toolHead`, `laser.modulePower` | e.g. `10W LASER` → label + watts |
+| connect `headType` (number) | `info.toolHead`, `laser.modulePower` | 3=1.6W, 4=10W, 6=20W, 7=40W (status `toolHead` often only `"LASER"`) |
 | `x` / `y` / `z` | `info.x` / `y` / `z` | mm, rounded to 0.001 |
 | `homed` | `info.homed` | boolean |
 | `isEnclosureDoorOpen` | `enclosure.doorOpen` | boolean |

@@ -6,6 +6,7 @@ const {
 	formatHms,
 	mapToolHead,
 	parseLaserModulePower,
+	mapConnectHeadType,
 	isDeviceToken,
 	isUnreachableError,
 } = require('./lib/snapmakerApi');
@@ -33,11 +34,19 @@ describe('snapmakerApi helpers', () => {
 		expect(mapToolHead('TOOLHEAD_3DPRINTING_1')).to.equal('Print');
 	});
 
-	it('parseLaserModulePower extracts rated watts', () => {
+	it('parseLaserModulePower extracts rated watts only when explicit', () => {
 		expect(parseLaserModulePower('10W LASER')).to.equal(10);
-		expect(parseLaserModulePower('LASER')).to.equal(1.6);
+		expect(parseLaserModulePower('LASER')).to.equal(0);
 		expect(parseLaserModulePower('40W LASER')).to.equal(40);
 		expect(parseLaserModulePower('CNC')).to.equal(0);
+	});
+
+	it('mapConnectHeadType maps Luban SSTP headType codes', () => {
+		expect(mapConnectHeadType(3)).to.deep.equal({ kind: 'Laser', label: '1.6W Laser', modulePower: 1.6 });
+		expect(mapConnectHeadType(4)).to.deep.equal({ kind: 'Laser', label: '10W Laser', modulePower: 10 });
+		expect(mapConnectHeadType(6)).to.deep.equal({ kind: 'Laser', label: '20W Laser', modulePower: 20 });
+		expect(mapConnectHeadType(1)).to.deep.equal({ kind: 'Print', label: 'Print', modulePower: 0 });
+		expect(mapConnectHeadType(99)).to.equal(null);
 	});
 
 	it('isUnreachableError detects network errors', () => {
