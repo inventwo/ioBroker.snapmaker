@@ -47,7 +47,7 @@ For **every code or config change** update `README.md`:
 ## Scope
 
 - Minimal, focused diffs; match inventwo patterns (`creality`, `enpal`, `autodarts`, `foxesscloud`, `tidy`, `motioneye`)
-- Run `npm run lint` after every change (CI `--max-warnings 0`)
+- After every code change and **before** commit/release: run `npm run lint` and ensure **0 errors** (Prettier/ESLint). Do not hand off a release if lint is red.
 - Icons: adapter uses `admin/snapmaker.svg`; README logo is `admin/snapmaker-logo.png`
 
 ## Further rules

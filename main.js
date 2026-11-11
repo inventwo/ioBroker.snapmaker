@@ -45,7 +45,6 @@ class Snapmaker extends utils.Adapter {
 		this.sessionReady = false;
 		/** Last non-zero laser power while a job is active (avoids 0% flicker between vectors). */
 		this.lastLaserPower = 0;
-		/** @type {{ kind: string, label: string, modulePower: number }|null} */
 		this.headInfo = null;
 		this.tokenRejectLogged = false;
 		this.unauthorizedLogged = false;
@@ -425,13 +424,13 @@ class Snapmaker extends utils.Adapter {
 		const statusLabel = mapToolHead(toolHeadRaw);
 		// Prefer connect headType (numeric) — status often only says "LASER" for 1.6W and 10W.
 		const modulePower =
-			statusWatts > 0 ? statusWatts : this.headInfo && this.headInfo.modulePower != null ? this.headInfo.modulePower : 0;
-		const toolHead =
 			statusWatts > 0
-				? statusLabel
-				: this.headInfo && this.headInfo.label
-					? this.headInfo.label
-					: statusLabel;
+				? statusWatts
+				: this.headInfo && this.headInfo.modulePower != null
+					? this.headInfo.modulePower
+					: 0;
+		const toolHead =
+			statusWatts > 0 ? statusLabel : this.headInfo && this.headInfo.label ? this.headInfo.label : statusLabel;
 		const laserPowerRaw = Math.max(0, Number(data.laserPower) || 0);
 		const workSpeed = Math.max(0, Number(data.workSpeed) || 0);
 		const x = roundCoord(data.x);

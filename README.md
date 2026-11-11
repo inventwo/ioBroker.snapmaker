@@ -84,7 +84,7 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### 0.4.1 (2026-11-11)
+### **WORK IN PROGRESS**
 - (skvarel) Fixed `laser.modulePower` / `info.toolHead`: use connect `headType`
 
 ### 0.4.0 (2026-11-11)

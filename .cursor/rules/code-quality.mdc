@@ -13,7 +13,7 @@ alwaysApply: false
 - JSDoc on public methods where helpful
 - Use `this.log.*` in adapter code — never `console.log` in production adapter code
 - Tabs, **single quotes** (match `prettier.config.mjs`)
-- ESLint via `@iobroker/eslint-config` — run `npm run lint` after every change
+- ESLint via `@iobroker/eslint-config` — run `npm run lint` after every change and before any release; **0 errors required** (fix with `npx eslint -c eslint.config.mjs . --fix` when Prettier fails)
 
 ## Resource cleanup
 
