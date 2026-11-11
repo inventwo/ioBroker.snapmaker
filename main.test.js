@@ -5,6 +5,7 @@ const {
 	normalizeProgress,
 	formatHms,
 	mapToolHead,
+	parseLaserModulePower,
 	isDeviceToken,
 	isUnreachableError,
 } = require('./lib/snapmakerApi');
@@ -27,8 +28,16 @@ describe('snapmakerApi helpers', () => {
 
 	it('mapToolHead maps known tool heads', () => {
 		expect(mapToolHead('TOOLHEAD_LASER_2')).to.equal('Laser');
+		expect(mapToolHead('10W LASER')).to.equal('10W Laser');
 		expect(mapToolHead('TOOLHEAD_CNC_1')).to.equal('CNC');
 		expect(mapToolHead('TOOLHEAD_3DPRINTING_1')).to.equal('Print');
+	});
+
+	it('parseLaserModulePower extracts rated watts', () => {
+		expect(parseLaserModulePower('10W LASER')).to.equal(10);
+		expect(parseLaserModulePower('LASER')).to.equal(1.6);
+		expect(parseLaserModulePower('40W LASER')).to.equal(40);
+		expect(parseLaserModulePower('CNC')).to.equal(0);
 	});
 
 	it('isUnreachableError detects network errors', () => {

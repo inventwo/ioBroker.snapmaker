@@ -16,6 +16,7 @@ const {
 	roundCoord,
 	toBool,
 	mapToolHead,
+	parseLaserModulePower,
 	isDeviceToken,
 	isUnreachableError,
 } = require('./lib/snapmakerApi');
@@ -410,7 +411,9 @@ class Snapmaker extends utils.Adapter {
 		const progress = normalizeProgress(data.progress);
 		const elapsed = Math.max(0, Math.floor(Number(data.elapsedTime) || 0));
 		const remaining = Math.max(0, Math.floor(Number(data.remainingTime) || 0));
-		const toolHead = mapToolHead(data.toolHead);
+		const toolHeadRaw = data.toolHead != null ? data.toolHead : data.headType;
+		const toolHead = mapToolHead(toolHeadRaw);
+		const modulePower = parseLaserModulePower(toolHeadRaw);
 		const laserPowerRaw = Math.max(0, Number(data.laserPower) || 0);
 		const workSpeed = Math.max(0, Number(data.workSpeed) || 0);
 		const x = roundCoord(data.x);
@@ -432,7 +435,8 @@ class Snapmaker extends utils.Adapter {
 
 		await this.setState('status', status, true);
 		await this.setState('printStatus', printStatus, true);
-		await this.setState('info.toolHead', toolHead || String(data.toolHead || ''), true);
+		await this.setState('info.toolHead', toolHead || String(toolHeadRaw || ''), true);
+		await this.setState('laser.modulePower', modulePower, true);
 		await this.setState('info.x', x, true);
 		await this.setState('info.y', y, true);
 		await this.setState('info.z', z, true);
@@ -580,6 +584,12 @@ class Snapmaker extends utils.Adapter {
 		});
 
 		await this.ensureChannel('laser', 'Laser');
+		await this.ensureState('laser.modulePower', 0, {
+			name: 'Laser module rated power',
+			type: 'number',
+			unit: 'W',
+			role: 'value',
+		});
 		await this.ensureState('laser.power', 0, {
 			name: 'Laser power (last active during job)',
 			type: 'number',

@@ -54,19 +54,6 @@
         "pl": "Pierwsze publiczne wydanie: odpytywanie statusu Snapmaker 2.0 (nazwa pliku, pozostały czas, postęp)\nStany mocy/prędkości lasera ze stabilną mocą podczas zadań\nOpcjonalny token API Luban; zaszyfrowane ustawienia\nTwardsza obsługa połączenia",
         "uk": "Перший публічний випуск: опитування статусу Snapmaker 2.0 (ім’я файлу, час, що залишився, прогрес)\nСтани потужності/швидкості лазера зі стабільною потужністю під час завдань\nНеобов’язковий токен API Luban; зашифровані налаштування\nПокращена обробка з’єднання",
         "zh-cn": "首次公开发布：Snapmaker 2.0 状态轮询（文件名、剩余时间、进度）\n作业期间稳定的激光功率/速度状态\n可选 Luban API 令牌；加密设置\n加强连接会话处理"
-      },
-      "0.0.1": {
-        "en": "initial release",
-        "de": "Erstveröffentlichung",
-        "ru": "Начальная версия",
-        "pt": "lançamento inicial",
-        "nl": "Eerste uitgave",
-        "fr": "Première version",
-        "it": "Versione iniziale",
-        "es": "Versión inicial",
-        "pl": "Pierwsze wydanie",
-        "uk": "Початкова версія",
-        "zh-cn": "首次出版"
       }
     },
     "titleLang": {
