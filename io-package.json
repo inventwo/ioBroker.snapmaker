@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "snapmaker",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "news": {
+      "0.4.0": {
+        "en": "Added `laser.modulePower` (rated watts) and wattage-aware `info.toolHead` labels",
+        "de": "Labels „Laser.ModulePower“ (Nennleistung) und „Info.Toolhead“ hinzugefügt",
+        "ru": "Добавлены надписи «Laser.ModulePower» (номинальная мощность) и надписи «Info.Toolhead», учитывающие мощность",
+        "pt": "Foram adicionados rótulos `laser.modulePower` (watts nominais) e `info.toolhead`",
+        "nl": "Labels `Laser.ModulePower` (nominaal watt) en wattage-bewuste `Info.ToolHead` labels toegevoegd",
+        "fr": "Ajout des étiquettes « Laser.ModulePower » (watts nominaux) et « Info.Toolhead »",
+        "it": "Aggiunte le etichette «Laser.modulePower» (watt nominali) e «Info.toolhead»",
+        "es": "Se han añadido etiquetas «Laser.ModulePower» (vatios nominales) e «Info.Toolhead» según potencia",
+        "pl": "Dodano etykiety „Laser.ModulePower” (waty znamionowe) i „Info.Toolhead” z uwzględnieniem mocy",
+        "uk": "Додано `Laser.ModulePower` (номінальні вати) та мітки `Info.Toolhead`, що відповідають потужності",
+        "zh-cn": "添加了 “Laser.ModulePower”（额定功率）和功率感知型 “Info.ToolHead” 标签"
+      },
       "0.3.0": {
         "en": "Added `meta.folder` typing and localized title for adapter/instance namespace\nAdded `info.x` / `info.y` / `info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine` / `totalLines`",
         "de": "Meta-Ordner und lokalisierter Titel für Adapter/Instanz-Namespace hinzugefügt\n`info.x`/`info.y`/`info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine`/`totalLines` hinzugefügt",

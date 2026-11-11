@@ -84,7 +84,7 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.4.0 (2026-11-11)
 - (skvarel) Added `laser.modulePower` (rated watts) and wattage-aware `info.toolHead` labels
 
 ### 0.3.0 (2026-11-08)
@@ -104,9 +104,6 @@ If you like our work and would like to support us, we appreciate any donation.
 - (skvarel) Added optional Luban API token setting with `machine.json` path help
 - (skvarel) Fixed connection/session handling (token validation, less aggressive reconnect)
 - (skvarel) Fixed adapter-checker findings (keywords, admin dependency, encrypted apiToken, workflows, i18n)
-
-### 0.0.1
-- (skvarel) initial scaffold
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)
