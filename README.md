@@ -85,6 +85,9 @@ If you like our work and would like to support us, we appreciate any donation.
 	### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+- (skvarel) Fixed Prettier formatting so CI lint passes
+
+### 0.4.1 (2026-11-11)
 - (skvarel) Fixed `laser.modulePower` / `info.toolHead`: use connect `headType`
 
 ### 0.4.0 (2026-11-11)
