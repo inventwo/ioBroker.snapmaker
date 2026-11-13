@@ -99,7 +99,7 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.5.0 (2026-11-13)
 - (skvarel) Added `laser.focalLength`, `laser.errorState`, `laser.camera`
 - (skvarel) Added `currentJob.estimatedTime` / `estimatedText`
 - (skvarel) Added `modules.*` (enclosure, rotary, emergency stop, air purifier) and `enclosure.ready` / `doorDetection` / `light` / `fan`
