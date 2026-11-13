@@ -4,6 +4,5 @@
 	"How often to request status (minimum 2 seconds)": "状态查询频率（最少 2 秒）",
 	"IP address": "IP地址",
 	"Local IP address of the Snapmaker (port 8080)": "Snapmaker 本地 IP 地址（端口 8080）",
-	"Poll interval (seconds)": "轮询间隔（秒）",
-	"snapmaker adapter settings": "snapmaker的适配器设置"
+	"Poll interval (seconds)": "轮询间隔（秒）"
 }

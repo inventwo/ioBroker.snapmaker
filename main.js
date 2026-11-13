@@ -15,6 +15,8 @@ const {
 	formatFinishAt,
 	roundCoord,
 	toBool,
+	toPercent,
+	parseModuleList,
 	mapToolHead,
 	parseLaserModulePower,
 	mapConnectHeadType,
@@ -46,6 +48,10 @@ class Snapmaker extends utils.Adapter {
 		/** Last non-zero laser power while a job is active (avoids 0% flicker between vectors). */
 		this.lastLaserPower = 0;
 		this.headInfo = null;
+		/** Enclosure reported by connect (`hasEnclosure`) — enables the `/api/v1/enclosure` poll. */
+		this.hasEnclosure = false;
+		/** Enclosure detected via status `moduleList` or connect. */
+		this.enclosureAvailable = false;
 		this.tokenRejectLogged = false;
 		this.unauthorizedLogged = false;
 		this.systemLanguage = 'en';
@@ -223,6 +229,7 @@ class Snapmaker extends utils.Adapter {
 				this.clearTimeout(this.pollTimer);
 				this.pollTimer = null;
 			}
+			this.setState('info.connection', false, true);
 			callback();
 		} catch (error) {
 			this.log.error(`Error during unload: ${error.message}`);
@@ -375,6 +382,7 @@ class Snapmaker extends utils.Adapter {
 			if (info && info.series) {
 				await this.setState('info.series', String(info.series), true);
 			}
+			this.hasEnclosure = toBool(info && info.hasEnclosure);
 			const mappedHead = mapConnectHeadType(info && info.headType);
 			if (mappedHead) {
 				this.headInfo = mappedHead;
@@ -440,6 +448,12 @@ class Snapmaker extends utils.Adapter {
 		const doorOpen = toBool(data.isEnclosureDoorOpen);
 		const currentLine = Math.max(0, Math.floor(Number(data.currentLine) || 0));
 		const totalLines = Math.max(0, Math.floor(Number(data.totalLines) || 0));
+		const estimated = Math.max(0, Math.floor(Number(data.estimatedTime) || 0));
+		const focalLength = roundCoord(data.laserFocalLength);
+		const laserErrorState = Math.max(0, Math.floor(Number(data.laser10WErrorState) || 0));
+		const laserCamera = toBool(data.laserCamera);
+		const modules = parseModuleList(data.moduleList);
+		this.enclosureAvailable = this.hasEnclosure || (modules !== null && modules.enclosure);
 		const jobActive = status === 'RUNNING' || status === 'PAUSED';
 		if (jobActive) {
 			if (laserPowerRaw > 0) {
@@ -464,6 +478,8 @@ class Snapmaker extends utils.Adapter {
 		await this.setState('currentJob.elapsedText', formatHms(elapsed), true);
 		await this.setState('currentJob.remainingTime', remaining, true);
 		await this.setState('currentJob.remainingText', formatHms(remaining), true);
+		await this.setState('currentJob.estimatedTime', estimated, true);
+		await this.setState('currentJob.estimatedText', formatHms(estimated), true);
 		await this.setState('currentJob.finishAt', formatFinishAt(remaining), true);
 		await this.setState('currentJob.currentLine', currentLine, true);
 		await this.setState('currentJob.totalLines', totalLines, true);
@@ -472,6 +488,41 @@ class Snapmaker extends utils.Adapter {
 		await this.setState('laser.powerRaw', laserPowerRaw, true);
 		await this.setState('laser.on', laserPowerRaw > 0, true);
 		await this.setState('laser.workSpeed', workSpeed, true);
+		await this.setState('laser.focalLength', focalLength, true);
+		await this.setState('laser.errorState', laserErrorState, true);
+		await this.setState('laser.camera', laserCamera, true);
+
+		if (modules) {
+			await this.setState('modules.enclosure', this.enclosureAvailable, true);
+			await this.setState('modules.rotary', modules.rotary, true);
+			await this.setState('modules.emergencyStop', modules.emergencyStop, true);
+			await this.setState('modules.airPurifier', modules.airPurifier, true);
+		}
+
+		await this.publishEnclosure();
+	}
+
+	/**
+	 * Poll `/api/v1/enclosure` (light, fan, door detection, ready). Failures never break the status poll.
+	 *
+	 * @returns {Promise<void>}
+	 */
+	async publishEnclosure() {
+		if (!this.api || !this.enclosureAvailable) {
+			return;
+		}
+		try {
+			const enclosure = await this.api.getEnclosure();
+			if (!enclosure) {
+				return;
+			}
+			await this.setState('enclosure.ready', toBool(enclosure.isReady), true);
+			await this.setState('enclosure.doorDetection', toBool(enclosure.isDoorEnabled), true);
+			await this.setState('enclosure.light', toPercent(enclosure.led), true);
+			await this.setState('enclosure.fan', toPercent(enclosure.fan), true);
+		} catch (err) {
+			this.log.debug(`Enclosure poll failed: ${err && err.message ? err.message : String(err)}`);
+		}
 	}
 
 	/**
@@ -578,6 +629,16 @@ class Snapmaker extends utils.Adapter {
 			name: 'Remaining time (text)',
 			type: 'string',
 		});
+		await this.ensureState('currentJob.estimatedTime', 0, {
+			name: 'Estimated total time',
+			type: 'number',
+			unit: 's',
+			role: 'value',
+		});
+		await this.ensureState('currentJob.estimatedText', '00:00:00', {
+			name: 'Estimated total time (text)',
+			type: 'string',
+		});
 		await this.ensureState('currentJob.finishAt', '', {
 			name: 'Finish at (local YYYY-MM-DD HH:MM)',
 			type: 'string',
@@ -596,6 +657,50 @@ class Snapmaker extends utils.Adapter {
 		await this.ensureChannel('enclosure', 'Enclosure');
 		await this.ensureState('enclosure.doorOpen', false, {
 			name: 'Enclosure door open',
+			type: 'boolean',
+			role: 'indicator',
+		});
+		await this.ensureState('enclosure.ready', false, {
+			name: 'Enclosure ready',
+			type: 'boolean',
+			role: 'indicator',
+		});
+		await this.ensureState('enclosure.doorDetection', false, {
+			name: 'Enclosure door detection enabled',
+			type: 'boolean',
+			role: 'indicator',
+		});
+		await this.ensureState('enclosure.light', 0, {
+			name: 'Enclosure light',
+			type: 'number',
+			unit: '%',
+			role: 'level',
+		});
+		await this.ensureState('enclosure.fan', 0, {
+			name: 'Enclosure fan',
+			type: 'number',
+			unit: '%',
+			role: 'level',
+		});
+
+		await this.ensureChannel('modules', 'Connected modules');
+		await this.ensureState('modules.enclosure', false, {
+			name: 'Enclosure attached',
+			type: 'boolean',
+			role: 'indicator',
+		});
+		await this.ensureState('modules.rotary', false, {
+			name: 'Rotary module attached',
+			type: 'boolean',
+			role: 'indicator',
+		});
+		await this.ensureState('modules.emergencyStop', false, {
+			name: 'Emergency stop button attached',
+			type: 'boolean',
+			role: 'indicator',
+		});
+		await this.ensureState('modules.airPurifier', false, {
+			name: 'Air purifier attached',
 			type: 'boolean',
 			role: 'indicator',
 		});
@@ -629,6 +734,22 @@ class Snapmaker extends utils.Adapter {
 			type: 'number',
 			unit: 'mm/min',
 			role: 'value',
+		});
+		await this.ensureState('laser.focalLength', 0, {
+			name: 'Laser focal length',
+			type: 'number',
+			unit: 'mm',
+			role: 'value',
+		});
+		await this.ensureState('laser.errorState', 0, {
+			name: 'Laser error state (0 = OK)',
+			type: 'number',
+			role: 'value',
+		});
+		await this.ensureState('laser.camera', false, {
+			name: 'Laser camera detected',
+			type: 'boolean',
+			role: 'indicator',
 		});
 	}
 }

@@ -4,6 +4,5 @@
 	"How often to request status (minimum 2 seconds)": "Jak często odpytywać status (minimum 2 sekundy)",
 	"IP address": "Adres IP",
 	"Local IP address of the Snapmaker (port 8080)": "Lokalny adres IP Snapmakera (port 8080)",
-	"Poll interval (seconds)": "Interwał sondowania (sekundy)",
-	"snapmaker adapter settings": "Ustawienia adaptera dla snapmaker"
+	"Poll interval (seconds)": "Interwał sondowania (sekundy)"
 }

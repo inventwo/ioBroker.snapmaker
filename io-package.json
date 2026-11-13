@@ -16,19 +16,6 @@
         "uk": "Виправлено більш гарне форматування, щоб CI lint проходив",
         "zh-cn": "修复了 Prettier 格式的问题，这样 CI lint 就可以通过了"
       },
-      "0.4.1": {
-        "en": "Fixed `laser.modulePower` / `info.toolHead`: use connect `headType`",
-        "de": "`Laser.ModulePower`/`info.toolhead` behoben: connect `HeadType`",
-        "ru": "Исправлено значение `Laser.modulePower`/`Info.ToolHead`: используйте подключение «HeadType»",
-        "pt": "`laser.modulePower`/`info.toolhead` fixo: use connect `headType`",
-        "nl": "`Laser.modulePower`/`Info.ToolHead` opgelost: gebruik connect `HeadType`",
-        "fr": "Laser.ModulePower/ Info.ToolHead` corrigé : utilisez connect",
-        "it": "Fisso `Laser.modulePower` /Info.toolHead`: usa connect `HeadType`",
-        "es": "`Laser.ModulePower`/`Info.Toolhead` fijo: use connect `HeadType`",
-        "pl": "Naprawiono `Laser.ModulePower`/`Info.Toolhead`: użyj połączenia `HeadType`",
-        "uk": "Виправлено `Laser.ModulePower`/`Info.Toolhead`: використовуйте підключення `HeadType`",
-        "zh-cn": "修复了 `laser.ModulePower`/`info.Toolhead`：使用连接 `HeadType`"
-      },
       "0.4.0": {
         "en": "Added `laser.modulePower` (rated watts) and wattage-aware `info.toolHead` labels",
         "de": "Labels „Laser.ModulePower“ (Nennleistung) und „Info.Toolhead“ hinzugefügt",
@@ -98,15 +85,15 @@
     "titleLang": {
       "en": "Snapmaker",
       "de": "Snapmaker",
-      "ru": "Снэпмейкер",
+      "ru": "Snapmaker",
       "pt": "Snapmaker",
       "nl": "Snapmaker",
       "fr": "Snapmaker",
       "it": "Snapmaker",
-      "es": "Creador de instantáneas",
+      "es": "Snapmaker",
       "pl": "Snapmaker",
-      "uk": "Снепмейкер",
-      "zh-cn": "快照制作器"
+      "uk": "Snapmaker",
+      "zh-cn": "Snapmaker"
     },
     "desc": {
       "en": "Integrate Snapmaker 2.0 machines (e.g. A350) into ioBroker and expose job status such as filename and remaining time",
@@ -183,15 +170,15 @@
         "name": {
           "en": "Snapmaker",
           "de": "Snapmaker",
-          "ru": "Снэпмейкер",
+          "ru": "Snapmaker",
           "pt": "Snapmaker",
           "nl": "Snapmaker",
           "fr": "Snapmaker",
           "it": "Snapmaker",
-          "es": "Creador de instantáneas",
+          "es": "Snapmaker",
           "pl": "Snapmaker",
-          "uk": "Снепмейкер",
-          "zh-cn": "快照制作器"
+          "uk": "Snapmaker",
+          "zh-cn": "Snapmaker"
         },
         "type": "meta.folder"
       },

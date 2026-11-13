@@ -4,6 +4,5 @@
 	"How often to request status (minimum 2 seconds)": "Wie oft der Status abgefragt wird (mindestens 2 Sekunden)",
 	"IP address": "IP-Adresse",
 	"Local IP address of the Snapmaker (port 8080)": "Lokale IP-Adresse des Snapmaker (Port 8080)",
-	"Poll interval (seconds)": "Abfrageintervall (Sekunden)",
-	"snapmaker adapter settings": "Adaptereinstellungen für snapmaker"
+	"Poll interval (seconds)": "Abfrageintervall (Sekunden)"
 }

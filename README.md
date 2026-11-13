@@ -60,16 +60,31 @@ Under `snapmaker.<instance>.*`:
 | `currentJob.elapsedText` | Elapsed time (`HH:MM:SS`) |
 | `currentJob.remainingTime` | Remaining time (seconds) |
 | `currentJob.remainingText` | Remaining time (`HH:MM:SS`) |
+| `currentJob.estimatedTime` | Estimated total job time as reported by the machine (seconds) |
+| `currentJob.estimatedText` | Estimated total job time (`HH:MM:SS`) |
 | `currentJob.finishAt` | Estimated finish time (local `YYYY-MM-DD HH:MM`) |
 | `currentJob.currentLine` / `totalLines` | G-code line progress |
+| `modules.enclosure` | Enclosure attached |
+| `modules.rotary` | Rotary module attached |
+| `modules.emergencyStop` | Emergency stop button attached |
+| `modules.airPurifier` | Air purifier attached |
 | `enclosure.doorOpen` | Enclosure door open |
+| `enclosure.ready` | Enclosure reports ready (only with an enclosure) |
+| `enclosure.doorDetection` | Door detection enabled (only with an enclosure) |
+| `enclosure.light` | Enclosure light brightness in % (only with an enclosure) |
+| `enclosure.fan` | Enclosure fan speed in % (only with an enclosure) |
 | `laser.modulePower` | Rated laser module power (W) from connect `headType` (3→1.6, 4→10, 6→20, 7→40, 9→2; `0` if not laser) |
 | `laser.power` | Laser power (%) — last non-zero value while job is `RUNNING`/`PAUSED` (no 0% flicker between vectors) |
 | `laser.powerRaw` | Laser power (%) — live snapshot from the machine (can be `0` between lines) |
 | `laser.on` | `true` while live power is greater than 0 |
 | `laser.workSpeed` | Work speed (`mm/min`) |
+| `laser.focalLength` | Laser focal length as reported by the machine (mm) |
+| `laser.errorState` | Laser module error state (`0` = OK) |
+| `laser.camera` | Laser camera detected |
 
 Job fields are filled while a job is active; idle machines may leave them empty / zero. For a finer live laser view, lower the poll interval (e.g. 2–3 s) and use `laser.powerRaw` / `laser.on`.
+
+The enclosure endpoint is only polled when an enclosure is detected (`modules.enclosure`), because machines without an enclosure return meaningless default values. The `modules.*` states are filled only if the firmware reports a module list.
 
 ## Support
 
@@ -84,11 +99,15 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Added `laser.focalLength`, `laser.errorState`, `laser.camera`
+- (skvarel) Added `currentJob.estimatedTime` / `estimatedText`
+- (skvarel) Added `modules.*` (enclosure, rotary, emergency stop, air purifier) and `enclosure.ready` / `doorDetection` / `light` / `fan`
+- (skvarel) Set `info.connection` to `false` on adapter stop
+- (skvarel) Fixed `laser.modulePower` / `info.toolHead`: use connect `headType` (10W module was shown as 1.6W)
+
 ### 0.4.2 (2026-11-11)
 - (skvarel) Fixed Prettier formatting so CI lint passes
-
-### 0.4.1 (2026-11-11)
-- (skvarel) Fixed `laser.modulePower` / `info.toolHead`: use connect `headType`
 
 ### 0.4.0 (2026-11-11)
 - (skvarel) Added `laser.modulePower` (rated watts) and wattage-aware `info.toolHead` labels

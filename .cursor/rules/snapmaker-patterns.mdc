@@ -40,6 +40,10 @@ Important JSON fields (names may vary slightly by firmware — normalize in one 
 | `homed` | `info.homed` | boolean |
 | `isEnclosureDoorOpen` | `enclosure.doorOpen` | boolean |
 | `currentLine` / `totalLines` | `currentJob.currentLine` / `totalLines` | G-code progress |
+| `estimatedTime` | `currentJob.estimatedTime` / `estimatedText` | Seconds (float on the wire → floored) |
+| `laserFocalLength` / `laser10WErrorState` / `laserCamera` | `laser.focalLength` / `errorState` / `camera` | mm / 0 = OK / boolean |
+| `moduleList.{enclosure,rotaryModule,emergencyStopButton,airPurifier}` | `modules.*` | Only if firmware reports `moduleList` |
+| `GET /api/v1/enclosure` (`isReady`, `isDoorEnabled`, `led`, `fan`) | `enclosure.ready` / `doorDetection` / `light` / `fan` | Poll **only** if an enclosure is detected — machines without one return dummy values (`led: 100`) |
 
 ## Curated state tree (do not dump entire status JSON)
 
@@ -55,7 +59,10 @@ snapmaker.0.
   currentJob.remainingTime       (s)
   currentJob.finishAt            (local YYYY-MM-DD HH:MM)
   currentJob.currentLine, totalLines
-  enclosure.doorOpen
+  currentJob.estimatedTime, estimatedText
+  enclosure.doorOpen, ready, doorDetection, light, fan
+  modules.enclosure, rotary, emergencyStop, airPurifier
+  laser.modulePower, power, powerRaw, on, workSpeed, focalLength, errorState, camera
 ```
 
 ## Source of truth for behavior

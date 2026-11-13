@@ -4,6 +4,5 @@
 	"How often to request status (minimum 2 seconds)": "Як часто запитувати статус (мінімум 2 секунди)",
 	"IP address": "IP-адреса",
 	"Local IP address of the Snapmaker (port 8080)": "Локальна IP-адреса Snapmaker (порт 8080)",
-	"Poll interval (seconds)": "Інтервал опитування (секунди)",
-	"snapmaker adapter settings": "Налаштування адаптера для snapmaker"
+	"Poll interval (seconds)": "Інтервал опитування (секунди)"
 }

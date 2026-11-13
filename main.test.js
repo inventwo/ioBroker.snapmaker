@@ -4,6 +4,8 @@ const { expect } = require('chai');
 const {
 	normalizeProgress,
 	formatHms,
+	toPercent,
+	parseModuleList,
 	mapToolHead,
 	parseLaserModulePower,
 	mapConnectHeadType,
@@ -47,6 +49,28 @@ describe('snapmakerApi helpers', () => {
 		expect(mapConnectHeadType(6)).to.deep.equal({ kind: 'Laser', label: '20W Laser', modulePower: 20 });
 		expect(mapConnectHeadType(1)).to.deep.equal({ kind: 'Print', label: 'Print', modulePower: 0 });
 		expect(mapConnectHeadType(99)).to.equal(null);
+	});
+
+	it('toPercent clamps to 0..100', () => {
+		expect(toPercent(100)).to.equal(100);
+		expect(toPercent(42.4)).to.equal(42);
+		expect(toPercent(-5)).to.equal(0);
+		expect(toPercent(250)).to.equal(100);
+		expect(toPercent(undefined)).to.equal(0);
+	});
+
+	it('parseModuleList normalizes the status moduleList', () => {
+		expect(
+			parseModuleList({ enclosure: true, rotaryModule: false, emergencyStopButton: true, airPurifier: false }),
+		).to.deep.equal({ enclosure: true, rotary: false, emergencyStop: true, airPurifier: false });
+		expect(parseModuleList({})).to.deep.equal({
+			enclosure: false,
+			rotary: false,
+			emergencyStop: false,
+			airPurifier: false,
+		});
+		expect(parseModuleList(undefined)).to.equal(null);
+		expect(parseModuleList([])).to.equal(null);
 	});
 
 	it('isUnreachableError detects network errors', () => {
