@@ -674,13 +674,13 @@ class Snapmaker extends utils.Adapter {
 			name: 'Enclosure light',
 			type: 'number',
 			unit: '%',
-			role: 'level',
+			role: 'value',
 		});
 		await this.ensureState('enclosure.fan', 0, {
 			name: 'Enclosure fan',
 			type: 'number',
 			unit: '%',
-			role: 'level',
+			role: 'value',
 		});
 
 		await this.ensureChannel('modules', 'Connected modules');
@@ -716,13 +716,13 @@ class Snapmaker extends utils.Adapter {
 			name: 'Laser power (last active during job)',
 			type: 'number',
 			unit: '%',
-			role: 'level',
+			role: 'value',
 		});
 		await this.ensureState('laser.powerRaw', 0, {
 			name: 'Laser power (live)',
 			type: 'number',
 			unit: '%',
-			role: 'level',
+			role: 'value',
 		});
 		await this.ensureState('laser.on', false, {
 			name: 'Laser firing',

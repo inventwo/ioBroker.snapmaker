@@ -99,6 +99,9 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Fixed state roles: use `value` instead of `level` for read-only laser/enclosure percent states (`E1011`)
+
 ### 0.5.0 (2026-11-13)
 - (skvarel) Added `laser.focalLength`, `laser.errorState`, `laser.camera`
 - (skvarel) Added `currentJob.estimatedTime` / `estimatedText`
