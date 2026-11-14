@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "snapmaker",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "news": {
+      "0.5.1": {
+        "en": "Fixed state roles: use `value` instead of `level` for read-only laser/enclosure percent states (`E1011`)",
+        "de": "Feste Rollen: Verwenden Sie `Wert` statt `Level` für lesbare Laser-/Gehäuse-Prozentwerte (`E1011`)",
+        "ru": "Роли с фиксированным состоянием: используйте «значение» вместо «уровень» для состояний лазера и корпуса, доступных только для чтения (`E1011`)",
+        "pt": "Funções fixas: use `valor` em vez de `nível` para estados percentuais de laser/gabinete (`E1011`)",
+        "nl": "Rollen met een vaste status: gebruik `waarde` in plaats van `niveau` voor de procentuele statussen van laser- en behuizingen die alleen kunnen worden gelezen (`E1011`)",
+        "fr": "Rôles à états fixes : utilisez « value » au lieu de « level » pour les pourcentages laser/boîtier en lecture seule (« E1011 »)",
+        "it": "Ruoli fissi: usa `value` invece di `level` per gli stati percentuali laser/enclosure di sola lettura (`E1011`)",
+        "es": "Funciones de estado fijas: utilice «valor» en lugar de «nivel» para los estados porcentuales de láser/gabinete de solo lectura («E1011»)",
+        "pl": "Role stanów stałych: używaj „wartości” zamiast „poziomu” dla stanów procentowych laserowych/obudowy tylko do odczytu („E1011”)",
+        "uk": "Виправлені ролі стану: використовуйте `значення` замість `level` для процентних станів лазеру/корпусу лише для читання (`E1011`)",
+        "zh-cn": "固定状态角色：对于只读激光/外壳百分比状态，使用 “值” 而不是 “等级” (`E1011`)"
+      },
       "0.5.0": {
         "en": "Added `laser.focalLength`, `laser.errorState`, `laser.camera`\nAdded `currentJob.estimatedTime` / `estimatedText`\nAdded `modules.*` (enclosure, rotary, emergency stop, air purifier) and `enclosure.ready` / `doorDetection` / `light` / `fan`\nSet `info.connection` to `false` on adapter stop\nFixed `laser.modulePower` / `info.toolHead`: use connect `headType` (10W module was shown as 1.6W)",
         "de": "`Laser.Focallength`, `Laser.ErrorState`, `laser.camera` hinzugefügt\n`CurrentJob.EstimatedTime`/`EstimatedText` hinzugefügt\n`Module.*` (Gehäuse, Drehregler, Not-Aus, Luftreiniger) und `enclosure.ready`/`DoorDetection`/`light`/`fan` hinzugefügt\nBei Adapterstopp `info.connection` auf `false` setzen\nFix `laser.modulePower`/`info.toolhead`: connect `HeadType` (10-W-Modul waren 1,6 W)",
@@ -80,19 +93,6 @@
         "pl": "Dodano brakujące tłumaczenia",
         "uk": "Додані відсутні переклади",
         "zh-cn": "添加了缺失的翻译"
-      },
-      "0.1.0": {
-        "en": "First public release: Snapmaker 2.0 status polling (file name, remaining time, progress)\nLaser power/speed states with stable power during jobs\nOptional Luban API token; encrypted settings\nHardened connection handling against session drops",
-        "de": "Erste öffentliche Version: Snapmaker 2.0 Status-Polling (Dateiname, Restzeit, Fortschritt)\nLaserleistung/-geschwindigkeit mit stabiler Leistung während Jobs\nOptionaler Luban-API-Token; verschlüsselte Einstellungen\nStabilere Verbindung gegen Session-Abbrüche",
-        "ru": "Первый публичный выпуск: опрос статуса Snapmaker 2.0 (имя файла, оставшееся время, прогресс)\nСостояния мощности/скорости лазера со стабильной мощностью во время заданий\nДополнительный токен API Luban; зашифрованные настройки\nУлучшенная обработка соединения",
-        "pt": "Primeira versão pública: polling de status do Snapmaker 2.0 (nome do arquivo, tempo restante, progresso)\nEstados de potência/velocidade do laser com potência estável durante trabalhos\nToken API Luban opcional; configurações criptografadas\nTratamento de conexão mais robusto",
-        "nl": "Eerste openbare release: Snapmaker 2.0-statuspolling (bestandsnaam, resterende tijd, voortgang)\nLaservermogen/-snelheid met stabiel vermogen tijdens jobs\nOptionele Luban API-token; versleutelde instellingen\nStabielere verbinding tegen sessie-onderbrekingen",
-        "fr": "Première version publique : polling d’état Snapmaker 2.0 (nom de fichier, temps restant, progression)\nÉtats puissance/vitesse laser avec puissance stable pendant les travaux\nJeton API Luban optionnel ; paramètres chiffrés\nGestion de connexion renforcée",
-        "it": "Prima versione pubblica: polling stato Snapmaker 2.0 (nome file, tempo rimanente, progresso)\nStati potenza/velocità laser con potenza stabile durante i job\nToken API Luban opzionale; impostazioni crittografate\nGestione connessione più robusta",
-        "es": "Primera versión pública: sondeo de estado Snapmaker 2.0 (nombre de archivo, tiempo restante, progreso)\nEstados de potencia/velocidad láser con potencia estable durante trabajos\nToken API Luban opcional; ajustes cifrados\nManejo de conexión más robusto",
-        "pl": "Pierwsze publiczne wydanie: odpytywanie statusu Snapmaker 2.0 (nazwa pliku, pozostały czas, postęp)\nStany mocy/prędkości lasera ze stabilną mocą podczas zadań\nOpcjonalny token API Luban; zaszyfrowane ustawienia\nTwardsza obsługa połączenia",
-        "uk": "Перший публічний випуск: опитування статусу Snapmaker 2.0 (ім’я файлу, час, що залишився, прогрес)\nСтани потужності/швидкості лазера зі стабільною потужністю під час завдань\nНеобов’язковий токен API Luban; зашифровані налаштування\nПокращена обробка з’єднання",
-        "zh-cn": "首次公开发布：Snapmaker 2.0 状态轮询（文件名、剩余时间、进度）\n作业期间稳定的激光功率/速度状态\n可选 Luban API 令牌；加密设置\n加强连接会话处理"
       }
     },
     "titleLang": {

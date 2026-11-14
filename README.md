@@ -99,7 +99,7 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.5.1 (2026-11-14)
 - (skvarel) Fixed state roles: use `value` instead of `level` for read-only laser/enclosure percent states (`E1011`)
 
 ### 0.5.0 (2026-11-13)
@@ -118,9 +118,6 @@ If you like our work and would like to support us, we appreciate any donation.
 ### 0.3.0 (2026-11-08)
 - (skvarel) Added `meta.folder` typing and localized title for adapter/instance namespace
 - (skvarel) Added `info.x` / `info.y` / `info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine` / `totalLines`
-
-### 0.2.0 (2026-11-06)
-- (skvarel) Added `currentJob.finishAt` (local `YYYY-MM-DD HH:MM`)
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)

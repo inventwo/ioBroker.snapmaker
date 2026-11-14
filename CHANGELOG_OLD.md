@@ -1,4 +1,7 @@
 # Older changes
+## 0.2.0 (2026-11-06)
+- (skvarel) Added `currentJob.finishAt` (local `YYYY-MM-DD HH:MM`)
+
 ## 0.1.1 (2026-11-05)
 - (skvarel) Added missing translations
 
