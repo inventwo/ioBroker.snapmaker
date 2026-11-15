@@ -71,7 +71,8 @@ class Snapmaker extends utils.Adapter {
 		await this.ensureInstanceMeta();
 
 		const host = String(this.config.host || '').trim();
-		const pollInterval = Math.max(2, Number(this.config.pollInterval) || 10);
+		// Clamp in code (not only jsonConfig): min 2 s, max ~24.8 d so setTimeout stays ≤ 2^31-1 ms
+		const pollInterval = Math.min(2147483, Math.max(2, Number(this.config.pollInterval) || 10));
 		this.pollIntervalMs = pollInterval * 1000;
 		this.stopping = false;
 

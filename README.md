@@ -99,6 +99,9 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Clamp poll interval in code (min 2 s, max so timeout stays within setTimeout limits)
+
 ### 0.5.1 (2026-11-14)
 - (skvarel) Fixed state roles: use `value` instead of `level` for read-only laser/enclosure percent states (`E1011`)
 
