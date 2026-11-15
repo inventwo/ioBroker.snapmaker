@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "snapmaker",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "news": {
+      "0.5.2": {
+        "en": "Clamp poll interval in code (min 2 s, max so timeout stays within setTimeout limits)",
+        "de": "Abfrageintervall im Code (min. 2 s, max. Timeout bleibt innerhalb von setTimeout)",
+        "ru": "Зажимайте интервал опроса в коде (минимум 2 с, максимум, чтобы тайм-аут оставался в пределах setTimeout)",
+        "pt": "Limite o intervalo de pesquisa no código (min 2 s, máx.)",
+        "nl": "Clamp poll-interval in code (min. 2 s, max zodat de time-out binnen de setTimeout-limieten blijft)",
+        "fr": "Limiter l'intervalle de sondage dans le code (min 2 s, max pour que le timeout reste limité)",
+        "it": "Intervallo clamp poll nel codice (min 2 s, max, timeout entro setTimeout)",
+        "es": "Fijar el intervalo de sondeo en el código (mínimo 2 s, máximo para que el tiempo de espera no exceda)",
+        "pl": "Interwał sondażu zacisku w kodzie (min. 2 s, max, więc limit czasu pozostaje w granicach setTimeout)",
+        "uk": "Інтервал опитування затиску в коді (мінімум 2 с, макс., тому тайм-аут залишається в межах setTimeout)",
+        "zh-cn": "限制代码中的轮询间隔（最小 2 秒，最大，因此超时时间保持在 setTimeout 限制范围内）"
+      },
       "0.5.1": {
         "en": "Fixed state roles: use `value` instead of `level` for read-only laser/enclosure percent states (`E1011`)",
         "de": "Feste Rollen: Verwenden Sie `Wert` statt `Level` für lesbare Laser-/Gehäuse-Prozentwerte (`E1011`)",
@@ -80,19 +93,6 @@
         "pl": "Dodano `CurrentJob.Finishat` (lokalny `RRRR-MM-DD HH:MM`)",
         "uk": "Додано `CurrentJob.finishAt` (локальний `РРРР-ММ-ДД ХХ:ММ`)",
         "zh-cn": "添加了 `currentJob.FinisHat`（本地 `YYYY-MM-DD HH: MM`）"
-      },
-      "0.1.1": {
-        "en": "Added missing translations",
-        "de": "Fehlende Übersetzungen",
-        "ru": "Добавлены недостающие переводы",
-        "pt": "Adição de traduções faltantes",
-        "nl": "Ontbrekende vertalingen toegevoegd",
-        "fr": "Ajout de traductions manquantes",
-        "it": "Aggiunte traduzioni mancanti",
-        "es": "Añadió las traducciones faltantes",
-        "pl": "Dodano brakujące tłumaczenia",
-        "uk": "Додані відсутні переклади",
-        "zh-cn": "添加了缺失的翻译"
       }
     },
     "titleLang": {

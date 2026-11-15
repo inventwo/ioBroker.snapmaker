@@ -99,7 +99,7 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.5.2 (2026-11-15)
 - (skvarel) Clamp poll interval in code (min 2 s, max so timeout stays within setTimeout limits)
 
 ### 0.5.1 (2026-11-14)
@@ -117,10 +117,6 @@ If you like our work and would like to support us, we appreciate any donation.
 
 ### 0.4.0 (2026-11-11)
 - (skvarel) Added `laser.modulePower` (rated watts) and wattage-aware `info.toolHead` labels
-
-### 0.3.0 (2026-11-08)
-- (skvarel) Added `meta.folder` typing and localized title for adapter/instance namespace
-- (skvarel) Added `info.x` / `info.y` / `info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine` / `totalLines`
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)

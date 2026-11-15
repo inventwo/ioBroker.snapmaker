@@ -1,4 +1,8 @@
 # Older changes
+## 0.3.0 (2026-11-08)
+- (skvarel) Added `meta.folder` typing and localized title for adapter/instance namespace
+- (skvarel) Added `info.x` / `info.y` / `info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine` / `totalLines`
+
 ## 0.2.0 (2026-11-06)
 - (skvarel) Added `currentJob.finishAt` (local `YYYY-MM-DD HH:MM`)
 
