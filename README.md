@@ -99,6 +99,9 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Bump `@iobroker/testing` to 6.3.2 (`S0064`)
+
 ### 0.5.2 (2026-11-15)
 - (skvarel) Clamp poll interval in code (min 2 s, max so timeout stays within setTimeout limits)
 
