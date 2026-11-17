@@ -99,7 +99,7 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.5.3 (2026-11-17)
 - (skvarel) Bump `@iobroker/testing` to 6.3.2 (`S0064`)
 
 ### 0.5.2 (2026-11-15)
@@ -117,9 +117,6 @@ If you like our work and would like to support us, we appreciate any donation.
 
 ### 0.4.2 (2026-11-11)
 - (skvarel) Fixed Prettier formatting so CI lint passes
-
-### 0.4.0 (2026-11-11)
-- (skvarel) Added `laser.modulePower` (rated watts) and wattage-aware `info.toolHead` labels
 
 ## Older changes
 - [CHANGELOG_OLD.md](CHANGELOG_OLD.md)

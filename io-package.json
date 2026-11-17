@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "snapmaker",
-    "version": "0.5.2",
+    "version": "0.5.3",
     "news": {
+      "0.5.3": {
+        "en": "Bump `@iobroker/testing` to 6.3.2 (`S0064`)",
+        "de": "Hump @iobroker /testing auf 6.3.2 (`S0064`)",
+        "ru": "Поднимитесь на версию «@iobroker /тестирование» до версии 6.3.2 (`S0064`)",
+        "pt": "Mude `@iobroker /testing` para 6.3.2 (`S0064`)",
+        "nl": "Verhoog `@iobroker /testing` naar 6.3.2 (`S0064`)",
+        "fr": "Bump `@iobroker /testing` à 6.3.2 (`S0064`)",
+        "it": "Porta `@iobroker /test` a 6.3.2 (`S0064`)",
+        "es": "Baje `@iobroker /testing` a 6.3.2 (`S0064`)",
+        "pl": "Bump `@iobroker /testing` do 6.3.2 (`S0064`)",
+        "uk": "Бап `@iobroker /тестування` до 6.3.2 (`S0064`)",
+        "zh-cn": "将 @iobroker /testing 升级到 6.3.2 (`S0064`)"
+      },
       "0.5.2": {
         "en": "Clamp poll interval in code (min 2 s, max so timeout stays within setTimeout limits)",
         "de": "Abfrageintervall im Code (min. 2 s, max. Timeout bleibt innerhalb von setTimeout)",
@@ -80,19 +93,6 @@
         "pl": "Dodano wpisanie `meta.folder` i zlokalizowany tytuł dla przestrzeni nazw adaptera/instancji\nDodano `info.x`/`info.y`/`info.z`, `info.homed`, `Enclosure.doorOpen`, `CurrentJob.CurrentLine`/`TotalLines`",
         "uk": "Додано введення `meta.folder` та локалізований заголовок для простору імен адаптеру/екземпляра\nДодано `info.x`/`info.y`/`info.z`, `info.homed`, `Enclosure.DoorOpen`, `CurrentJob.CurrentLine`/`TotalInes`",
         "zh-cn": "为适配器/实例命名空间添加了 “meta.folder” 键入和本地化标题\n添加了 `info.x`/`info.y`/`info.z`、`info.homed`、`enclosure.doorOpen`、`currentJob.currentLine`/`TotalLines`"
-      },
-      "0.2.0": {
-        "en": "Added `currentJob.finishAt` (local `YYYY-MM-DD HH:MM`)",
-        "de": "`CurrentJob.FinishAt` hinzugefügt (lokal `YYY-MM-DD HH:MM`)",
-        "ru": "Добавлен `CurrentJob.Finishat` (локальный `ГГГГ-ММ-ДД ХХ:ММ`)",
-        "pt": "Adicionado `currentJob.finisHat` (local `YYY-MM-DD HH:MM`)",
-        "nl": "`CurrentJob.finishAt` toegevoegd (lokaal `YYYY-MM-DD HH:MM`)",
-        "fr": "A ajouté « CurrentJob.Finishat » (local « YYYY-MM-DD HH:MM »)",
-        "it": "Aggiunto «CurrentJob.finishAt» (locale «AAAA-MM-GG HH:MM»)",
-        "es": "Se ha añadido `CurrentJob.FinishA' (local `YYY-MM-DD HH:MM`)",
-        "pl": "Dodano `CurrentJob.Finishat` (lokalny `RRRR-MM-DD HH:MM`)",
-        "uk": "Додано `CurrentJob.finishAt` (локальний `РРРР-ММ-ДД ХХ:ММ`)",
-        "zh-cn": "添加了 `currentJob.FinisHat`（本地 `YYYY-MM-DD HH: MM`）"
       }
     },
     "titleLang": {
