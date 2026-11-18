@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "snapmaker",
-    "version": "0.5.3",
+    "version": "0.6.0",
     "news": {
+      "0.6.0": {
+        "en": "Added `currentJob.fileBase` (job file name without extension)",
+        "de": "`CurrentJob.FileBase` hinzugefügt (Jobname ohne Dateiendung)",
+        "ru": "Добавлено `CurrentJob.FileBase` (имя файла задания без расширения)",
+        "pt": "Adicionado `currentJob.fileBase` (nome do job sem extensão)",
+        "nl": "`CurrentJob.FileBase` toegevoegd (naam van het taakbestand zonder extensie)",
+        "fr": "Ajout de « CurrentJob.FileBase » (nom du job sans extension)",
+        "it": "Aggiunto `CurrentJob.FileBase` (job senza estensione)",
+        "es": "Se ha añadido `CurrentJob.FileBase` (nombre del trabajo sin extensión)",
+        "pl": "Dodano `CurrentJob.FileBase` (nazwa pliku zadania bez rozszerzenia)",
+        "uk": "Додано `CurrentJob.FileBase` (ім'я файлу завдання без розширення)",
+        "zh-cn": "添加了 `currentJob.FileBase`（不带扩展名的作业文件名）"
+      },
       "0.5.3": {
         "en": "Bump `@iobroker/testing` to 6.3.2 (`S0064`)",
         "de": "Hump @iobroker /testing auf 6.3.2 (`S0064`)",
@@ -80,19 +93,6 @@
         "pl": "Dodano etykiety „Laser.ModulePower” (waty znamionowe) i „Info.Toolhead” z uwzględnieniem mocy",
         "uk": "Додано `Laser.ModulePower` (номінальні вати) та мітки `Info.Toolhead`, що відповідають потужності",
         "zh-cn": "添加了 “Laser.ModulePower”（额定功率）和功率感知型 “Info.ToolHead” 标签"
-      },
-      "0.3.0": {
-        "en": "Added `meta.folder` typing and localized title for adapter/instance namespace\nAdded `info.x` / `info.y` / `info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine` / `totalLines`",
-        "de": "Meta-Ordner und lokalisierter Titel für Adapter/Instanz-Namespace hinzugefügt\n`info.x`/`info.y`/`info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine`/`totalLines` hinzugefügt",
-        "ru": "Добавлена типизация `meta.folder` и локализованный заголовок для пространства имён адаптера/экземпляра\nДобавлены `info.x`/`info.y`/`info.z`, `info.homed`, `Enclosure.doorOpen`, `CurrentJob.CurrentLine`/`TotalLines`",
-        "pt": "Adicionou a digitação `meta.folder` e o título do namespace adaptador/instância\nAdicionado `info.x`/`info.z`, `info.homed`, `enclosure.doorOpen`, `currentJob.currentLine`/`totalLines`",
-        "nl": "Typen van `meta.folder` en gelokaliseerde titel toegevoegd voor de naamruimte van de adapter/instance\n`info.x`/`info.y`/`info.z`, `info.homed`, `Enclosure.DoorOpen`, `CurrentJob.CurrentLine`/`TotalLines` toegevoegd",
-        "fr": "Ajout de la saisie « meta.folder » et d'un titre localisé pour l'espace de noms Adapter/Instance\nAjout de « info.x`/`info.y`/`info.z`, `info.homed`, `Enclosure.DoorOpen`, `CurrentJob.CurrentLine`/`TotalLines`",
-        "it": "Aggiunti `meta.folder` e titolo localizzato per namespace adattatore/istanza\nAggiunti «info.x»/«info.y», «info.home», «Enclosure.doorOpen», «CurrentJob.CurrentLine»/«TotalLines»",
-        "es": "Se ha añadido el tipo «meta.folder» y el título localizado del adaptor/instancia\nSe ha añadido `info.x`/`info.y`/`info.z`, `info.homed`, `Enclosure.DoorOpen`, `CurrentJob.CurrentLine`/`TotalLine`",
-        "pl": "Dodano wpisanie `meta.folder` i zlokalizowany tytuł dla przestrzeni nazw adaptera/instancji\nDodano `info.x`/`info.y`/`info.z`, `info.homed`, `Enclosure.doorOpen`, `CurrentJob.CurrentLine`/`TotalLines`",
-        "uk": "Додано введення `meta.folder` та локалізований заголовок для простору імен адаптеру/екземпляра\nДодано `info.x`/`info.y`/`info.z`, `info.homed`, `Enclosure.DoorOpen`, `CurrentJob.CurrentLine`/`TotalInes`",
-        "zh-cn": "为适配器/实例命名空间添加了 “meta.folder” 键入和本地化标题\n添加了 `info.x`/`info.y`/`info.z`、`info.homed`、`enclosure.doorOpen`、`currentJob.currentLine`/`TotalLines`"
       }
     },
     "titleLang": {

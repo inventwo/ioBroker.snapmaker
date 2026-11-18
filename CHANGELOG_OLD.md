@@ -1,4 +1,7 @@
 # Older changes
+## 0.4.2 (2026-11-11)
+- (skvarel) Fixed Prettier formatting so CI lint passes
+
 ## 0.4.0 (2026-11-11)
 - (skvarel) Added `laser.modulePower` (rated watts) and wattage-aware `info.toolHead` labels
 
