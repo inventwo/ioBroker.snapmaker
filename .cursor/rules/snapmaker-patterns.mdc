@@ -31,7 +31,7 @@ Important JSON fields (names may vary slightly by firmware — normalize in one 
 | API field | State | Notes |
 |-----------|-------|-------|
 | `status` | `status` | `IDLE` / `RUNNING` / `PAUSED` / … |
-| `fileName` | `currentJob.fileName` | Current / last job |
+| `fileName` | `currentJob.fileName` / `fileBase` | Full name + name without last extension |
 | `progress` | `currentJob.progress` | Often `0..1` → expose as `0..100` % |
 | `elapsedTime` | `currentJob.elapsedTime` | Seconds |
 | `remainingTime` | `currentJob.remainingTime` | Seconds |
@@ -53,7 +53,7 @@ snapmaker.0.
   info.series, toolHead
   info.x, y, z, homed
   status
-  currentJob.fileName
+  currentJob.fileName, fileBase
   currentJob.progress            (%)
   currentJob.elapsedTime         (s)
   currentJob.remainingTime       (s)

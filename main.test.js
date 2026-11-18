@@ -4,6 +4,7 @@ const { expect } = require('chai');
 const {
 	normalizeProgress,
 	formatHms,
+	stripFileExtension,
 	toPercent,
 	parseModuleList,
 	mapToolHead,
@@ -49,6 +50,14 @@ describe('snapmakerApi helpers', () => {
 		expect(mapConnectHeadType(6)).to.deep.equal({ kind: 'Laser', label: '20W Laser', modulePower: 20 });
 		expect(mapConnectHeadType(1)).to.deep.equal({ kind: 'Print', label: 'Print', modulePower: 0 });
 		expect(mapConnectHeadType(99)).to.equal(null);
+	});
+
+	it('stripFileExtension removes the last extension', () => {
+		expect(stripFileExtension('Weihnachtsbude.nc')).to.equal('Weihnachtsbude');
+		expect(stripFileExtension('path/to/job.gcode')).to.equal('job');
+		expect(stripFileExtension('archive.tar.gz')).to.equal('archive.tar');
+		expect(stripFileExtension('noext')).to.equal('noext');
+		expect(stripFileExtension('')).to.equal('');
 	});
 
 	it('toPercent clamps to 0..100', () => {

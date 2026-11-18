@@ -15,6 +15,7 @@ const {
 	formatFinishAt,
 	roundCoord,
 	toBool,
+	stripFileExtension,
 	toPercent,
 	parseModuleList,
 	mapToolHead,
@@ -474,6 +475,7 @@ class Snapmaker extends utils.Adapter {
 		await this.setState('info.z', z, true);
 		await this.setState('info.homed', homed, true);
 		await this.setState('currentJob.fileName', fileName, true);
+		await this.setState('currentJob.fileBase', stripFileExtension(fileName), true);
 		await this.setState('currentJob.progress', progress, true);
 		await this.setState('currentJob.elapsedTime', elapsed, true);
 		await this.setState('currentJob.elapsedText', formatHms(elapsed), true);
@@ -604,6 +606,10 @@ class Snapmaker extends utils.Adapter {
 
 		await this.ensureChannel('currentJob', 'Current job');
 		await this.ensureState('currentJob.fileName', '', { name: 'Job file name', type: 'string' });
+		await this.ensureState('currentJob.fileBase', '', {
+			name: 'Job file name without extension',
+			type: 'string',
+		});
 		await this.ensureState('currentJob.progress', 0, {
 			name: 'Progress',
 			type: 'number',

@@ -54,7 +54,8 @@ Under `snapmaker.<instance>.*`:
 | `info.homed` | Axes homed |
 | `status` | Machine status (`IDLE`, `RUNNING`, `PAUSED`, …) |
 | `printStatus` | Job / print status text |
-| `currentJob.fileName` | Current / last job file name |
+| `currentJob.fileName` | Current / last job file name (full, e.g. `Weihnachtsbude.nc`) |
+| `currentJob.fileBase` | Job file name without extension (e.g. `Weihnachtsbude`) |
 | `currentJob.progress` | Progress in % |
 | `currentJob.elapsedTime` | Elapsed time (seconds) |
 | `currentJob.elapsedText` | Elapsed time (`HH:MM:SS`) |
@@ -99,6 +100,9 @@ If you like our work and would like to support us, we appreciate any donation.
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (skvarel) Added `currentJob.fileBase` (job file name without extension)
+
 ### 0.5.3 (2026-11-17)
 - (skvarel) Bump `@iobroker/testing` to 6.3.2 (`S0064`)
 
